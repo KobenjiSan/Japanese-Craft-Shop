@@ -3,5 +3,21 @@
 @tailwind utilities;
 
 body {
-    @apply bg-brand-dark text-brand-light font-japanese w-full;
+    @apply bg-brand-dark text-brand-light font-japanese;
+}
+
+.interaction-effects {
+    @apply transition-transform duration-700 ease-in-out transform;
+}
+
+.nav-link {
+    @apply interaction-effects hover:font-bold hover:scale-105 active:scale-95;
+}
+
+.btn-border{
+    @apply border-2 border-brand-light;
+}
+
+.btn-ux {
+    @apply interaction-effects hover:scale-105 hover:cursor-pointer active:scale-95;
 }

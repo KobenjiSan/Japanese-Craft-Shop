@@ -1,3 +1,5 @@
+using API.src.Application.Services.Products;
+using API.src.Application.Services.Products.Interfaces;
 using API.src.Infrastructure;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -21,12 +23,29 @@ builder.Services.AddSingleton<IMongoDatabase>(sp =>
     return client.GetDatabase(settings.DatabaseName);
 });
 
+// ----------------------
+// Application Services
+// ----------------------
+
+// MediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+// Products
+builder.Services.AddScoped<IProductWriteService, ProductWriteService>();
+
+// ----------------------
+// Framework Features
+// ----------------------
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 app.UseMiddleware<API.src.Api.Middleware.ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
+app.MapControllers();
 app.MapGet("/", () => "API is running");
 
 app.Run();

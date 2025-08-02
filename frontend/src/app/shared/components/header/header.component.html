@@ -4,20 +4,20 @@
     <h1 class="px-2 text-3xl lg:text-4xl">木漏れ日</h1>
 
     <!-- Desktop Nav -->
-    <nav class="text-xl lg:text-3xl flex gap-2 lg:gap-6 hover:cursor-pointer">
-        <a class="nav-link">Home</a>
-        <a class="nav-link">Shop</a>
+    <nav class="text-xl lg:text-2xl flex gap-2 lg:gap-6 hover:cursor-pointer">
+        <a routerLink="/" [class]="router.url === '/' ? 'underline' : ''" class="nav-link">Home</a>
+        <a routerLink="/shop" [class]="router.url === '/shop' ? 'underline' : ''" class="nav-link">Shop</a>
         <a class="nav-link">About</a>
     </nav>
 
     <!-- Searchbar -->
-    <div class="w-4/12 2xl:w-6/12 text-xl lg:text-2xl mx-2 px-2 py-0.5 lg:py-1 btn-border">
+    <div class="w-6/12 2xl:w-8/12 text-xl lg:text-2xl mx-2 px-2 py-0.5 lg:py-1 btn-border">
         Search goes here*
     </div>
 
     <!-- User Menu -->
     <div class="mx-2">
-        <a class="inline-block px-6 lg:px-8 py-0.5 text-xl lg:text-3xl btn-border btn-ux">Login</a>
+        <a class="inline-block px-6 lg:px-8 py-0.5 text-xl lg:text-2xl btn-border btn-ux">Login</a>
     </div>
 </header>
 

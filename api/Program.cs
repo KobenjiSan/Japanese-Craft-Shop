@@ -23,6 +23,8 @@ builder.Services.AddSingleton<IMongoDatabase>(sp =>
 
 var app = builder.Build();
 
+app.UseMiddleware<API.src.Api.Middleware.ExceptionHandlingMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.MapGet("/", () => "API is running");

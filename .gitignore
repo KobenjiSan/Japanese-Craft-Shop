@@ -17,10 +17,17 @@ api/*.user
 api/*.suo
 api/*.vspscc
 api/*.vssscc
+api/*.userosscache
+api/*.sln.docstates
 
 # === General ===
+node_modules/
+dist/
 *.log
 .env
+.env.local
+.env.*.local
 .vscode/
 .DS_Store
 Thumbs.db
+.Spotlight-V100

@@ -18,8 +18,35 @@ namespace API.src.Application.Commands.Products
 
         public async Task<ProductResponseDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            // TODO : implement image check and upload
-            List<string> imageUrls = new(); // temp
+
+            if (request.Images is null || !request.Images.Any())
+                throw new ArgumentException("At least one image is required");
+
+            List<string> imageUrls = new();
+
+            if (request.Images != null && request.Images.Any())
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                Directory.CreateDirectory(uploadsFolder);
+
+                foreach (var image in request.Images)
+                {
+                    if (image.Length > 0)
+                    {
+                        var extension = Path.GetExtension(image.FileName);
+                        var uniqueFileName = $"{Guid.NewGuid()}{extension}";
+                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await image.CopyToAsync(stream);
+                        }
+
+                        var relativePath = $"/uploads/{uniqueFileName}";
+                        imageUrls.Add(relativePath);
+                    }
+                }
+            }
 
             // TODO : add automapper
             var newProduct = new Product

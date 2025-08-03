@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.src.Api.Controllers.Products
 {
-
-    [Authorize]
     [ApiController]
     [Route("api/products")]
     public class ProductWriteController : ControllerBase

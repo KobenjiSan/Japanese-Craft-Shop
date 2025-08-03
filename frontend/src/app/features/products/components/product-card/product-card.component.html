@@ -1,0 +1,26 @@
+<div class="w-56 2xl:w-72 text-brand-dark hover:cursor-pointer" routerLink="/shop"> <!-- TODO: change this to route to product page-->
+    <div class="relative h-56 2xl:h-72 flex justify-end">
+        <img 
+            [src]="product()?.imageUrls?.at(0)" 
+            alt="Product {{product()?.title }} image"
+            class="w-full h-full object-cover absolute inset-0 -z-10 rounded-t-sm "
+        />
+        <div class="z-10">
+            <button class="my-1 mx-1 w-8 h-8 2xl:w-9 2xl:h-9">
+                <img 
+                    src="love_3.png" 
+                    alt=""
+                    class="w-8 2xl:w-9 self-center pt-0.5 m-auto"
+                />
+            </button>
+        </div>
+    </div>
+
+    <div class="flex px-2 w-full justify-between bg-secondary rounded-b-sm">
+        <div class="flex flex-col">
+            <h1 class="text-2xl font-bold">{{ product()?.title }}</h1>
+            <h3 class="text-xl text-primary-light">{{ product()?.category }}</h3>
+        </div>
+        <h3 class="self-end text-2xl">${{ product()?.price }}</h3>
+    </div>
+</div>

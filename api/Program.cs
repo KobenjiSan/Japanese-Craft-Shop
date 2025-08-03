@@ -39,6 +39,14 @@ builder.Services.AddScoped<IProductReadService, ProductReadService>();
 // Framework Features
 // ----------------------
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -53,6 +61,8 @@ app.UseStaticFiles(new StaticFileOptions
         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
     RequestPath = ""
 });
+
+app.UseCors("AllowFrontend");
 
 app.MapControllers();
 app.MapGet("/", () => "API is running");

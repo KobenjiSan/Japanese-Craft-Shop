@@ -43,7 +43,7 @@ namespace API.src.Application.Commands.Products
                             await image.CopyToAsync(stream);
                         }
 
-                        var relativePath = $"/uploads/{uniqueFileName}";
+                        var relativePath = $"http://localhost:5088/uploads/{uniqueFileName}"; // TODO: Fix later
                         imageUrls.Add(relativePath);
                     }
                 }

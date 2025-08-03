@@ -23,7 +23,16 @@ namespace API.src.Api.Controllers.Products
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<ProductResponseDto>> CreateProductAsync([FromForm] CreateProductDto dto)
         {
-            var command = dto.Adapt<CreateProductCommand>();
+            var command = new CreateProductCommand
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+                Price = dto.Price,
+                Images = dto.Images,
+                Category = dto.Category,
+                IsFeatured = dto.IsFeatured,
+                Stock = dto.Stock
+            };
 
             var createdProduct = await _mediator.Send(command);
 

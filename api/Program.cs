@@ -33,6 +33,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 
 // Products
 builder.Services.AddScoped<IProductWriteService, ProductWriteService>();
+builder.Services.AddScoped<IProductReadService, ProductReadService>();
 
 // ----------------------
 // Framework Features

@@ -1,3 +1,4 @@
+using API.src.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.src.Api.Middleware
@@ -24,6 +25,7 @@ namespace API.src.Api.Middleware
                 {
                     UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
                     ArgumentException => StatusCodes.Status400BadRequest,
+                    NotFoundException => StatusCodes.Status404NotFound,
                     _ => StatusCodes.Status500InternalServerError
                 };
 

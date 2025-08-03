@@ -2,6 +2,8 @@ using API.src.Application.Common.Exceptions;
 using API.src.Application.DTOs.Queries;
 using API.src.Application.Services.Products.Interfaces;
 using MediatR;
+using Mapster;
+using API.src.Domain;
 
 namespace API.src.Application.Queries.Products
 {
@@ -21,19 +23,8 @@ namespace API.src.Application.Queries.Products
             if (product == null)
                 throw new NotFoundException("Product not found.");
 
-            return new ProductResponseDto
-            {
-                Id = product.Id,
-                Title = product.Title,
-                Description = product.Description,
-                Price = product.Price,
-                ImageUrls = product.ImageUrls,
-                Category = product.Category,
-                IsFeatured = product.IsFeatured,
-                Stock = product.Stock,
-                LastUpdated = product.LastUpdated,
-                CreatedAt = product.CreatedAt
-            };
+            // Uses Mapper to auto map product into a new ProductResponseDto
+            return product.Adapt<ProductResponseDto>();
         }
     }
 }

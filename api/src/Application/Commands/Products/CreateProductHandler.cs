@@ -2,6 +2,7 @@ using API.src.Application.DTOs.Queries;
 using API.src.Application.Services.Products.Interfaces;
 using API.src.Domain;
 using MediatR;
+using Mapster;
 
 namespace API.src.Application.Commands.Products
 {
@@ -48,35 +49,15 @@ namespace API.src.Application.Commands.Products
                 }
             }
 
-            // TODO : add automapper
-            var newProduct = new Product
-            {
-                Title = request.Title,
-                Description = request.Description,
-                Price = request.Price,
-                ImageUrls = imageUrls,  // TODO : fix
-                Category = request.Category,
-                IsFeatured = request.IsFeatured,
-                Stock = request.Stock,
-                LastUpdated = DateTime.UtcNow,
-                CreatedAt = DateTime.UtcNow
-            };
+            var newProduct = request.Adapt<Product>();
+            newProduct.ImageUrls = imageUrls;
+            newProduct.LastUpdated = DateTime.UtcNow;
+            newProduct.CreatedAt = DateTime.UtcNow;
 
             var createdProduct = await _writeService.CreateProductAsync(newProduct);
 
-            return new ProductResponseDto
-            {
-                Id = createdProduct.Id,
-                Title = createdProduct.Title,
-                Description = createdProduct.Description,
-                Price = createdProduct.Price,
-                ImageUrls = createdProduct.ImageUrls,
-                Category = createdProduct.Category,
-                IsFeatured = createdProduct.IsFeatured,
-                Stock = createdProduct.Stock,
-                LastUpdated = createdProduct.LastUpdated,
-                CreatedAt = createdProduct.CreatedAt
-            };
+            // Uses Mapper to auto map createdProduct into a new ProductResponseDto
+            return createdProduct.Adapt<ProductResponseDto>();
         }
     }
 }

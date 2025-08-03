@@ -1,8 +1,8 @@
 using API.src.Application.Commands.Products;
 using API.src.Application.DTOs.Products.Commands;
 using API.src.Application.DTOs.Queries;
+using Mapster;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.src.Api.Controllers.Products
@@ -23,16 +23,7 @@ namespace API.src.Api.Controllers.Products
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<ProductResponseDto>> CreateProductAsync([FromForm] CreateProductDto dto)
         {
-            var command = new CreateProductCommand
-            {
-                Title = dto.Title,
-                Description = dto.Description,
-                Price = dto.Price,
-                Images = dto.Images,
-                Category = dto.Category,
-                IsFeatured = dto.IsFeatured,
-                Stock = dto.Stock,
-            };
+            var command = dto.Adapt<CreateProductCommand>();
 
             var createdProduct = await _mediator.Send(command);
 

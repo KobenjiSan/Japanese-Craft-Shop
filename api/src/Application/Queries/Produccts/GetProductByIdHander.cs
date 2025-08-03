@@ -3,7 +3,6 @@ using API.src.Application.DTOs.Queries;
 using API.src.Application.Services.Products.Interfaces;
 using MediatR;
 using Mapster;
-using API.src.Domain;
 
 namespace API.src.Application.Queries.Products
 {

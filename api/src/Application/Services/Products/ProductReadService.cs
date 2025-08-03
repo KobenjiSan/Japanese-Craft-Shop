@@ -16,6 +16,11 @@ namespace API.src.Application.Services.Products
             _productsCollection = database.GetCollection<Product>(settings.Value.ProductsCollectionName);
         }
 
+        public async Task<List<Product>> GetAllProductsAsync()
+        {
+            return await _productsCollection.Find(_ => true).ToListAsync();
+        }
+
         public async Task<Product?> GetProductByIdAsync(string productId)
         {
             return await _productsCollection.Find(p => p.Id == productId).FirstOrDefaultAsync();

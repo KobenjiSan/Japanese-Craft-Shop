@@ -17,6 +17,15 @@ namespace API.src.Api.Controllers.Products
             _mediator = mediator;
         }
 
+        // GET /api/products
+        [HttpGet]
+        public async Task<ActionResult<List<ProductResponseDto>>> GetAllProductsAsync() // TODO : Add PFS later
+        {
+            var query = new GetAllProductsQuery { };
+            var result = await _mediator.Send(query);
+            return Ok(result); 
+        }
+
         // GET /api/products/{id}
         [HttpGet("{id}", Name = "GetProductById")]
         public async Task<ActionResult<ProductResponseDto>> GetProductByIdAsync([FromRoute] string id)

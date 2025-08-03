@@ -4,6 +4,7 @@ namespace API.src.Application.Services.Products.Interfaces
 {
     public interface IProductReadService
     {
+        Task<List<Product>> GetAllProductsAsync();
         Task<Product?> GetProductByIdAsync(string productId);
     }
 }

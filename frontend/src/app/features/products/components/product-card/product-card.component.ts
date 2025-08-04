@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { Product } from '../../../../shared/models/product.model';
 import { RouterLink } from '@angular/router';
 
@@ -10,4 +10,11 @@ import { RouterLink } from '@angular/router';
 })
 export class ProductCardComponent {
   product = input<Product>();
+
+  isLiked = signal(false); // To be changed to update by user
+
+  toggleLiked(event: MouseEvent){
+    event.stopPropagation();
+    this.isLiked.set(!this.isLiked())
+  }
 }

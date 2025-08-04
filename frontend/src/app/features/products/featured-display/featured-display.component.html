@@ -4,9 +4,11 @@
     <section class="mt-4 flex flex-row justify-center w-10/12 mx-auto">
         @if(products().length > 0){
             @for(product of products(); track product.id){
-                <app-product-card 
-                    [product]="product"
-                />
+                @if(product.isFeatured){
+                    <app-product-card 
+                        [product]="product"
+                    />
+                }
             }
         } @else {
             <p>No featured products.</p>

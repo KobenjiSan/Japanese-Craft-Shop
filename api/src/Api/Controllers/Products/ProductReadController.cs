@@ -1,4 +1,4 @@
-using API.src.Application.DTOs.Queries;
+using API.src.Application.DTOs.Responses;
 using API.src.Application.Queries.Products;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

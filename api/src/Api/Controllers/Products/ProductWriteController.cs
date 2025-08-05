@@ -1,6 +1,6 @@
 using API.src.Application.Commands.Products;
 using API.src.Application.DTOs.Products.Commands;
-using API.src.Application.DTOs.Queries;
+using API.src.Application.DTOs.Responses;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

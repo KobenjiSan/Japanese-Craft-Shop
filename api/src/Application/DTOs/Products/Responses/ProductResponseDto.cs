@@ -1,4 +1,4 @@
-namespace API.src.Application.DTOs.Queries
+namespace API.src.Application.DTOs.Responses
 {
     public class ProductResponseDto
     {

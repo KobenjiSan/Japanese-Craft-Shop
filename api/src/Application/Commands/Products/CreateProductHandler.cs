@@ -1,4 +1,4 @@
-using API.src.Application.DTOs.Queries;
+using API.src.Application.DTOs.Responses;
 using API.src.Application.Services.Products.Interfaces;
 using API.src.Domain;
 using MediatR;

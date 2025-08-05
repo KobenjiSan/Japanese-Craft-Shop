@@ -1,0 +1,35 @@
+using API.src.Application.Services.Users.Interfaces;
+using API.src.Domain;
+using API.src.Infrastructure;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+
+namespace API.src.Application.Services.Users
+{
+    public class UserReadService : IUserReadService
+    {
+        private readonly IMongoCollection<User> _usersCollection;
+
+        public UserReadService(IOptions<MongoDBSettings> settings, IMongoDatabase database)
+        {
+            _usersCollection = database.GetCollection<User>(settings.Value.UsersCollectionName);
+        }
+
+        public async Task<bool> EmailExistsAsync(string email)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Email, email);
+            return await _usersCollection.Find(filter).AnyAsync();
+        }
+
+        public Task<User?> GetUserByIdentifierAsync(string identifier)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> UsernameExistsAsync(string username)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Username, username);
+            return await _usersCollection.Find(filter).AnyAsync();
+        }
+    }
+}

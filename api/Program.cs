@@ -1,5 +1,9 @@
+using API.src.Application.Common.Authentication;
 using API.src.Application.Services.Products;
 using API.src.Application.Services.Products.Interfaces;
+using API.src.Application.Services.Users;
+using API.src.Application.Services.Users.Interfaces;
+using API.src.Domain;
 using API.src.Infrastructure;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
@@ -12,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 // ----------------------
 
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
+
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
 // ----------------------
 // Infrastructure Services
@@ -31,9 +37,16 @@ builder.Services.AddSingleton<IMongoDatabase>(sp =>
 // MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
+// Jwt
+builder.Services.AddSingleton<JwtTokenGenerator>();
+
 // Products
 builder.Services.AddScoped<IProductWriteService, ProductWriteService>();
 builder.Services.AddScoped<IProductReadService, ProductReadService>();
+
+// Users
+builder.Services.AddScoped<IUserWriteService, UserWriteService>();
+builder.Services.AddScoped<IUserReadService, UserReadService>();
 
 // ----------------------
 // Framework Features

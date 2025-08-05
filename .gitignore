@@ -19,6 +19,7 @@ api/*.vspscc
 api/*.vssscc
 api/*.userosscache
 api/*.sln.docstates
+api/appsettings.Development.json
 
 # === General ===
 node_modules/

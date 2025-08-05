@@ -21,9 +21,13 @@ namespace API.src.Application.Services.Users
             return await _usersCollection.Find(filter).AnyAsync();
         }
 
-        public Task<User?> GetUserByIdentifierAsync(string identifier)
+        public async Task<User?> GetUserByIdentifierAsync(string identifier)
         {
-            throw new NotImplementedException();
+            var filter = Builders<User>.Filter.Or(
+                Builders<User>.Filter.Eq(u => u.Email, identifier),
+                Builders<User>.Filter.Eq(u => u.Username, identifier)
+            );
+            return await _usersCollection.Find(filter).FirstOrDefaultAsync();
         }
 
         public async Task<bool> UsernameExistsAsync(string username)

@@ -4,7 +4,7 @@
             @if(product()?.isFeatured){
                 <h3 class="italic text-center border-y py-3 border-primary-light">Featured Product</h3>
             }
-            <h1 class="text-6xl font-bold text-center py-4">{{ product()?.title | uppercase }}</h1>
+            <h1 class="text-5xl font-bold text-right py-4">{{ product()?.title | uppercase }}</h1>
         </div>
         <div>
             <section class="flex flex-row justify-between border-y py-3 border-primary-light">
@@ -17,7 +17,7 @@
                 >
                     ADD TO CART
                 </button>
-                <button class="nav-link hover:scale-125 active:scale-90">
+                <button (click)="toggleLiked($event)" class="nav-link hover:scale-125 active:scale-90">
                     <img 
                         src="{{ isLiked() ? 'love_3.png' : 'love_1.png'}}"
                         alt=""
@@ -32,12 +32,18 @@
         </div>
     </div>
     <div class="flex-1 w-5/12 contain-content px-4 my-4 border-r-2 border-primary-light">
-        <img src="{{product()?.imageUrls?.at(0)}}" alt="temp" class="w-fit">
+    <img [src]="currentImage()" alt="temp" class="w-fit">
     </div>
     <div class="w-2/12 flex flex-col gap-4 mt-4 items-end">
         @for(image of product()?.imageUrls; track product()?.imageUrls?.findIndex){
             <div class="w-1/2">
-                <img src="{{image}}" alt="test" class="nav-link">
+                <button (click)="setImage(image)">
+                    <img 
+                        src="{{image}}" 
+                        alt="{{ product()?.title }} Image" 
+                        class="nav-link {{currentImage() == image ? 'brightness-75 w-full h-full object-cover scale-90' : ''}}"
+                    />
+                </button>
             </div>
         }
     </div>

@@ -15,6 +15,7 @@ import { UpperCasePipe } from '@angular/common';
 export class ProductComponent {
 
   product = signal<Product | null>(null); // cheating
+  currentImage = signal<string>('');
 
   isLiked = signal(false);
 
@@ -26,11 +27,23 @@ export class ProductComponent {
 
   readonly loadProductEffect = effect(() => {
     this.productService.getProductById(this.id!).subscribe({
-      next: (data) => { this.product.set(data) },
+      next: (data) => { 
+        this.product.set(data);
+        this.currentImage.set(this.product()?.imageUrls?.at(0)!);
+      },
       error: (err) => {
         console.error('Error loading product', err);
         // TODO : Add ToastR
       }
     });
   });
+
+  setImage(image: string){
+    this.currentImage.set(image);
+  }
+
+  toggleLiked(event: MouseEvent){
+    event.stopPropagation();
+    this.isLiked.set(!this.isLiked())
+  }
 }

@@ -28,7 +28,9 @@ namespace API.src.Application.Common.Authentication
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
-                new Claim("id", user.Id)
+                new Claim("id", user.Id),
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim("role", user.Role)
             };
 
             var token = new JwtSecurityToken(

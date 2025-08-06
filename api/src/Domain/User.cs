@@ -14,5 +14,7 @@ namespace API.src.Domain
         public string PasswordHash { get; set; } = string.Empty;
 
         public List<string> LikedProductIds { get; set; } = new();
+
+        public string Role { get; set; } = "User";
     }
 }

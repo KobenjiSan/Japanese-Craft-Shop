@@ -3,12 +3,14 @@ using API.src.Application.DTOs.Products.Commands;
 using API.src.Application.DTOs.Responses;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.src.Api.Controllers.Products
 {
     [ApiController]
     [Route("api/products")]
+    [Authorize(Roles = "Admin")]
     public class ProductWriteController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -37,7 +39,7 @@ namespace API.src.Api.Controllers.Products
             var createdProduct = await _mediator.Send(command);
 
             return CreatedAtRoute(
-                "GetProductById",   // Note: Not implemented
+                "GetProductById",
                 new { id = createdProduct.Id },
                 createdProduct
             );

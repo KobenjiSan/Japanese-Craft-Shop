@@ -51,6 +51,12 @@ builder.Services.AddScoped<IUserWriteService, UserWriteService>();
 builder.Services.AddScoped<IUserReadService, UserReadService>();
 
 // ----------------------
+// Utility Services
+// ----------------------
+
+builder.Services.AddHttpContextAccessor();
+
+// ----------------------
 // Framework Features
 // ----------------------
 

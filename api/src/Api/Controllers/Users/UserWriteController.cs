@@ -3,6 +3,8 @@ using API.src.Application.DTOs.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
+using API.src.Application.DTOs.Users.Responses;
 
 namespace API.src.Api.Controllers.Users
 {
@@ -47,6 +49,20 @@ namespace API.src.Api.Controllers.Users
                 throw new ArgumentException("Password is required.");
 
             var command = dto.Adapt<LoginUserCommand>();
+
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        // PUT /api/users/like
+        [HttpPut("like")]
+        [Authorize]
+        public async Task<ActionResult<LikedProductUserResponseDto>> LikeProductAsync([FromBody] LikeProductUserDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.ProductId))
+                throw new ArgumentException("No valid product id supplied.");
+
+            var command = dto.Adapt<LikeProductUserCommand>();
 
             var result = await _mediator.Send(command);
             return Ok(result);

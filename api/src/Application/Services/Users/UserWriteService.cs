@@ -19,5 +19,20 @@ namespace API.src.Application.Services.Users
         {
             await _usersCollection.InsertOneAsync(user);
         }
+
+        public async Task<bool> TryLikeProductAsync(string userId, string productId)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Id, userId);
+            var update = Builders<User>.Update.AddToSet(u => u.LikedProductIds, productId);
+            var result = await _usersCollection.UpdateOneAsync(filter, update);
+            return result.ModifiedCount == 0;
+        }
+
+        public async Task UnlikeProductAsync(string userId, string productId)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Id, userId);
+            var update = Builders<User>.Update.Pull(u => u.LikedProductIds, productId);
+            await _usersCollection.UpdateOneAsync(filter, update);
+        }
     }
 }

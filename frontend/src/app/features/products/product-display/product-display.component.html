@@ -1,0 +1,14 @@
+<div class="py-4 px-4 w-full">
+    <section class="mt-4 flex flex-row w-10/12 mx-auto gap-4">
+        @if(products().length > 0){
+            @for(product of products(); track product.id){
+                <app-product-card 
+                    [product]="product"
+                    [size]="'small'"
+                />
+            }
+        } @else {
+            <p>No featured products.</p>
+        }
+    </section>
+</div>

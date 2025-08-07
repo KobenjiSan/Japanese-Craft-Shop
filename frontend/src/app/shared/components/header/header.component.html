@@ -7,7 +7,7 @@
     <nav class="text-xl lg:text-2xl flex gap-2 lg:gap-6 hover:cursor-pointer">
         <a routerLink="/" [class]="router.url === '/' ? 'underline' : ''" class="nav-link">Home</a>
         <a routerLink="/shop" [class]="router.url === '/shop' ? 'underline' : ''" class="nav-link">Shop</a>
-        <a class="nav-link">About</a>
+        <a routerLink="/about" [class]="router.url === '/about' ? 'underline' : ''" class="nav-link">About</a> 
     </nav>
 
     <!-- Searchbar -->
@@ -16,12 +16,25 @@
     </div>
 
     <!-- User Menu -->
-    <div class="mx-2">
-        <a routerLink="/login" 
-            class="inline-block px-6 lg:px-8 py-0.5 text-xl lg:text-2xl btn-border btn-ux">
-            Login
-        </a>
-    </div>
+   
+    @if(auth.isLoggedIn()){
+        <div class="flex w-28 gap-6 mx-2">
+            <a routerLink="/favorites" class="self-center"> 
+                <img src="love_1.png" alt="Likes Page Link" class="w-10 nav-link hover:scale-90">
+            </a>
+            <a routerLink="/profile" class="self-center">
+                <img src="user_icon.png" class="w-8 nav-link hover:scale-90">
+            </a>
+        </div>
+    } @else {
+        <div class="mx-2">
+            <a routerLink="/login" 
+                class="inline-block px-6 lg:px-8 py-0.5 text-xl lg:text-2xl btn-border btn-ux">
+                Login
+            </a>
+        </div>
+    }
+    
 </header>
 
 

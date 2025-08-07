@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../models/User.model';
+import { User } from '../models/user.model';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -29,6 +29,16 @@ export class AuthService {
       }
     }
     return this.currentUser;
+  }
+
+  isAdmin(): boolean{
+    const user = this.getCurrentUser();
+    return user?.role === 'Admin';
+  }
+
+  getUsername(): string {
+    const user = this.getCurrentUser();
+    return user ? user.unique_name : 'Not Signed In';
   }
 
   register(username: string, email: string, password: string): Observable<any>{

@@ -1,0 +1,10 @@
+<p>hello {{username}}!</p>
+
+@if(auth.isAdmin()){
+    <button (click)="toDashboard()" class="nav-link hover:cursor-pointer">Admin Dashboard</button>
+}
+
+<br>
+
+<button (click)="onLogout()">LOG OUT</button>
+

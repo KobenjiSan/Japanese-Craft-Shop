@@ -4,6 +4,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { ProductComponent } from './pages/product/product.component';
+import { LoginComponent } from './features/authorization/login/login.component';
+import { RegisterComponent } from './features/authorization/register/register.component';
 
 export const routes: Routes = [
     {
@@ -20,8 +22,8 @@ export const routes: Routes = [
         path: '',
         component: AuthLayoutComponent,
         children: [
-            // TODO : add login component
-            // TODO : add register component
+            {path: 'login', component: LoginComponent},
+            {path: 'register', component: RegisterComponent}
         ]
     }
 ];

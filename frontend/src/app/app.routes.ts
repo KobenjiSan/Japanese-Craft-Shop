@@ -14,6 +14,8 @@ import { FavoritesPageComponent } from './features/users/favorites-page/favorite
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { adminGuard } from './core/guards/admin.guard';
 
+
+// NOTE: this is eagerly loaded ---- Break into lazy loading
 export const routes: Routes = [
     {
         path: '',
@@ -37,3 +39,4 @@ export const routes: Routes = [
         ]
     }
 ];
+

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { jwtDecode } from 'jwt-decode';
@@ -71,5 +71,20 @@ export class AuthService {
   logout(): void{
     localStorage.removeItem('auth_token');
     this.currentUser = null;
+    this.curUserLikedProducts.set([]); // TODO
+  }
+
+  likeProduct(productId: string): Observable<boolean>{
+    return this.http.put<boolean>(`${this.baseUrl}/like`, {
+      productId
+    });
+  }
+
+  private curUserLikedProducts = signal<string[]>([]) // TODO
+
+  readonly likedProducts = computed(() => this.curUserLikedProducts()); // TODO
+
+  getLikedProducts(): Observable<string[]>{
+    return this.http.get<string[]>(`${this.baseUrl}/liked`);
   }
 }

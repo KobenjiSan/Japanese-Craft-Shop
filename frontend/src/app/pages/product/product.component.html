@@ -4,7 +4,7 @@
             @if(product()?.isFeatured){
                 <h3 class="italic text-center border-y py-3 border-primary-light">Featured Product</h3>
             }
-            <h1 class="text-5xl font-bold text-right py-4">{{ product()?.title | uppercase }}</h1>
+            <h1 class="text-5xl font-bold text-right py-4 text-ellipsis overflow-hidden">{{ product()?.title | uppercase }}</h1>
         </div>
         <div>
             <section class="flex flex-row justify-between border-y py-3 border-primary-light">

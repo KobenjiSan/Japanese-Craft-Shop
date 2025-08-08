@@ -35,5 +35,12 @@ namespace API.src.Application.Services.Users
             var filter = Builders<User>.Filter.Eq(u => u.Username, username);
             return await _usersCollection.Find(filter).AnyAsync();
         }
+
+        public async Task<List<string>> GetAllLikedByUserAsync(string userId)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Id, userId);
+            var projection = Builders<User>.Projection.Expression(u => u.LikedProductIds);
+            return await _usersCollection.Find(filter).Project(projection).FirstOrDefaultAsync();
+        }
     }
 }

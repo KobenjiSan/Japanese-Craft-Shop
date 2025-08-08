@@ -38,7 +38,7 @@ namespace API.src.Application.Commands.Users
             if (alreadyLiked)
                 await _writeService.UnlikeProductAsync(userId, request.ProductId);
 
-            return new LikedProductUserResponseDto { IsLiked = !alreadyLiked };
+            return new LikedProductUserResponseDto(!alreadyLiked);
         }
     }
 }

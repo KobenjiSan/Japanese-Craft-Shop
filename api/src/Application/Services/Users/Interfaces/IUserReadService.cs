@@ -7,5 +7,6 @@ namespace API.src.Application.Services.Users.Interfaces
         Task<bool> EmailExistsAsync(string email);
         Task<User?> GetUserByIdentifierAsync(string identifier);
         Task<bool> UsernameExistsAsync(string username);
+        Task<List<string>> GetAllLikedByUserAsync(string userId);
     }
 }

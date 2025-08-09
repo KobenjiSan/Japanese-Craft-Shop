@@ -1,10 +1,10 @@
-using API.src.Application.DTOs.Responses;
+using API.src.Application.Common.DTOs.Products;
 using API.src.Application.Services.Products.Interfaces;
 using API.src.Domain;
 using Mapster;
 using MediatR;
 
-namespace API.src.Application.Queries.Products
+namespace API.src.Application.Queries.Products.GetAllProducts
 {
     public class GetAllProductsHandler : IRequestHandler<GetAllProductsQuery, List<ProductResponseDto>>
     {

@@ -1,7 +1,6 @@
-using API.src.Application.Commands.Products;
-using API.src.Application.DTOs.Products.Commands;
-using API.src.Application.DTOs.Responses;
-using Mapster;
+using System.ComponentModel.DataAnnotations;
+using API.src.Application.Commands.Products.CreateProduct;
+using API.src.Application.Common.DTOs.Products;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,17 +22,17 @@ namespace API.src.Api.Controllers.Products
         // POST /api/products
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<ActionResult<ProductResponseDto>> CreateProductAsync([FromForm] CreateProductDto dto)
+        public async Task<ActionResult<ProductResponseDto>> CreateProductAsync([FromForm] CreateProductRequest request)
         {
             var command = new CreateProductCommand
             {
-                Title = dto.Title,
-                Description = dto.Description,
-                Price = dto.Price,
-                Images = dto.Images,
-                Category = dto.Category,
-                IsFeatured = dto.IsFeatured,
-                Stock = dto.Stock
+                Title = request.Title,
+                Description = request.Description,
+                Price = request.Price,
+                Images = request.Images,
+                Category = request.Category,
+                IsFeatured = request.IsFeatured,
+                Stock = request.Stock
             };
 
             var createdProduct = await _mediator.Send(command);
@@ -44,5 +43,23 @@ namespace API.src.Api.Controllers.Products
                 createdProduct
             );
         }
+    }
+
+    // Request DTOs
+    public record CreateProductRequest
+    {
+        [Required]
+        public string Title { get; init; } = string.Empty;
+        [Required]
+        public string Description { get; init; } = string.Empty;
+        [Range(0.01, 9999.99)]
+        public decimal Price { get; init; }
+        [Required]
+        public List<IFormFile> Images { get; init; } = new();
+        [Required]
+        public string Category { get; init; } = string.Empty;
+        public bool IsFeatured { get; init; } = false; // Default
+        [Range(1, 9999)]
+        public int Stock { get; init; }
     }
 }

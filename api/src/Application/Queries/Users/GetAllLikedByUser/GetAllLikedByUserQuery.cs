@@ -1,7 +1,6 @@
-using API.src.Application.DTOs.Responses;
 using MediatR;
 
-namespace API.src.Application.Queries.Users
+namespace API.src.Application.Queries.Users.GetAllLikedByUser
 {
     public class GetAllLikedByUserQuery : IRequest<AllLikedByUserResponseDto>
     {

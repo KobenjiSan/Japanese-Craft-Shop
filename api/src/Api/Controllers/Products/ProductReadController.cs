@@ -1,5 +1,6 @@
-using API.src.Application.DTOs.Responses;
-using API.src.Application.Queries.Products;
+using API.src.Application.Common.DTOs.Products;
+using API.src.Application.Queries.Products.GetAllProducts;
+using API.src.Application.Queries.Products.GetProductById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;

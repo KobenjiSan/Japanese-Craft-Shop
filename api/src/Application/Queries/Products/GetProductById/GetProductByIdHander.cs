@@ -1,10 +1,10 @@
 using API.src.Application.Common.Exceptions;
-using API.src.Application.DTOs.Responses;
+using API.src.Application.Common.DTOs.Products;
 using API.src.Application.Services.Products.Interfaces;
 using MediatR;
 using Mapster;
 
-namespace API.src.Application.Queries.Products
+namespace API.src.Application.Queries.Products.GetProductById
 {
     public class GetProductByIdHandler : IRequestHandler<GetProductByIdQuery, ProductResponseDto>
     {

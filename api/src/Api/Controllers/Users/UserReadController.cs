@@ -1,10 +1,6 @@
-using MediatR;
+using API.src.Application.Queries.Users.GetAllLikedByUser;
 using Microsoft.AspNetCore.Mvc;
-using Mapster;
-using Microsoft.AspNetCore.Authorization;
-using API.src.Application.DTOs.Users.Responses;
-using API.src.Application.DTOs.Responses;
-using API.src.Application.Queries.Users;
+using MediatR;
 
 namespace API.src.Api.Controllers.Users
 {

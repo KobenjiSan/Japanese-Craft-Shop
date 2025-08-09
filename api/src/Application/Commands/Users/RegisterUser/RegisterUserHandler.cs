@@ -1,10 +1,9 @@
-using API.src.Application.DTOs.Users.Responses;
 using API.src.Application.Services.Users.Interfaces;
 using API.src.Domain;
 using Mapster;
 using MediatR;
 
-namespace API.src.Application.Commands.Users
+namespace API.src.Application.Commands.Users.RegisterUser
 {
     public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Unit>
     {

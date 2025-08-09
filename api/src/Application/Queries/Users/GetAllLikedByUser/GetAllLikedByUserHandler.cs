@@ -1,9 +1,7 @@
-using API.src.Application.DTOs.Responses;
 using API.src.Application.Services.Users.Interfaces;
-using API.src.Domain;
 using MediatR;
 
-namespace API.src.Application.Queries.Users
+namespace API.src.Application.Queries.Users.GetAllLikedByUser
 {
     public class GetAllLikedByUserHandler : IRequestHandler<GetAllLikedByUserQuery, AllLikedByUserResponseDto>
     {
@@ -25,7 +23,7 @@ namespace API.src.Application.Queries.Users
 
             var reponseList = await _readService.GetAllLikedByUserAsync(userId);
 
-            return new AllLikedByUserResponseDto { LikedProducts = reponseList };
+            return new AllLikedByUserResponseDto(reponseList);
 
         }
     }

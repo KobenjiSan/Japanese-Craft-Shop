@@ -1,6 +1,8 @@
-namespace API.src.Application.DTOs.Users.Commands
+using MediatR;
+
+namespace API.src.Application.Commands.Users.LoginUser
 {
-    public class LoginUserDto
+    public class LoginUserCommand : IRequest<LoginUserResponseDto>
     {
         public string Identifier { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;

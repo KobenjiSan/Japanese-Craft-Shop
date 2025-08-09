@@ -1,10 +1,9 @@
 using API.src.Application.Common.Authentication;
 using API.src.Application.Common.Exceptions;
-using API.src.Application.DTOs.Users.Responses;
 using API.src.Application.Services.Users.Interfaces;
 using MediatR;
 
-namespace API.src.Application.Commands.Users
+namespace API.src.Application.Commands.Users.LoginUser
 {
     public class LoginUserHandler : IRequestHandler<LoginUserCommand, LoginUserResponseDto>
     {
@@ -30,11 +29,7 @@ namespace API.src.Application.Commands.Users
 
             var (token, expiresAt) = _tokenGenerator.GenerateToken(user);
 
-            return new LoginUserResponseDto
-            {
-                Token = token,
-                ExpiresAt = expiresAt
-            };
+            return new LoginUserResponseDto(token, expiresAt);
         }
     }
 }

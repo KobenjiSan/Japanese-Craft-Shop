@@ -1,10 +1,10 @@
-using API.src.Application.DTOs.Responses;
+using API.src.Application.Common.DTOs.Products;
 using API.src.Application.Services.Products.Interfaces;
 using API.src.Domain;
 using MediatR;
 using Mapster;
 
-namespace API.src.Application.Commands.Products
+namespace API.src.Application.Commands.Products.CreateProduct
 {
     public class CreateProductHandler : IRequestHandler<CreateProductCommand, ProductResponseDto>
     {

@@ -1,12 +1,11 @@
 using API.src.Application.Common.Exceptions;
-using API.src.Application.DTOs.Users.Responses;
 using API.src.Application.Services.Products.Interfaces;
 using API.src.Application.Services.Users.Interfaces;
 using MediatR;
 
-namespace API.src.Application.Commands.Users
+namespace API.src.Application.Commands.Users.LikedProductUser
 {
-    public class LikeProductUserHandler : IRequestHandler<LikeProductUserCommand, LikedProductUserResponseDto>
+    public class LikeProductUserHandler : IRequestHandler<LikeProductUserCommand, LikeProductUserResponseDto>
     {
 
         private readonly IUserWriteService _writeService;
@@ -24,7 +23,7 @@ namespace API.src.Application.Commands.Users
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<LikedProductUserResponseDto> Handle(LikeProductUserCommand request, CancellationToken cancellationToken)
+        public async Task<LikeProductUserResponseDto> Handle(LikeProductUserCommand request, CancellationToken cancellationToken)
         {
             var userId = _httpContextAccessor.HttpContext?.User?.FindFirst("id")?.Value;
             if (userId == null)
@@ -38,7 +37,7 @@ namespace API.src.Application.Commands.Users
             if (alreadyLiked)
                 await _writeService.UnlikeProductAsync(userId, request.ProductId);
 
-            return new LikedProductUserResponseDto(!alreadyLiked);
+            return new LikeProductUserResponseDto(!alreadyLiked);
         }
     }
 }

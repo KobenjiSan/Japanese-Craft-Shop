@@ -3,6 +3,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { jwtDecode } from 'jwt-decode';
+import { LikedProducts, LikeResult } from '../models/liked-products.model';
 
 @Injectable({
   providedIn: 'root'
@@ -71,20 +72,15 @@ export class AuthService {
   logout(): void{
     localStorage.removeItem('auth_token');
     this.currentUser = null;
-    this.curUserLikedProducts.set([]); // TODO
   }
 
-  likeProduct(productId: string): Observable<boolean>{
-    return this.http.put<boolean>(`${this.baseUrl}/like`, {
+  likeProduct(productId: string): Observable<LikeResult>{
+    return this.http.put<LikeResult>(`${this.baseUrl}/like`, {
       productId
     });
   }
 
-  private curUserLikedProducts = signal<string[]>([]) // TODO
-
-  readonly likedProducts = computed(() => this.curUserLikedProducts()); // TODO
-
-  getLikedProducts(): Observable<string[]>{
-    return this.http.get<string[]>(`${this.baseUrl}/liked`);
+  getLikedProducts(): Observable<LikedProducts>{
+    return this.http.get<LikedProducts>(`${this.baseUrl}/liked`);
   }
 }

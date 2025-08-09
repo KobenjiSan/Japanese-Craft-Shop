@@ -20,7 +20,7 @@ namespace API.src.Api.Controllers.Users
         }
 
         // GET /api/users/liked
-        [HttpGet("/liked")]
+        [HttpGet("liked")]
         public async Task<ActionResult<AllLikedByUserResponseDto>> GetAllLikedByUser()
         {
             var query = new GetAllLikedByUserQuery { };

@@ -1,14 +1,14 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { Product } from '../../../../shared/models/product.model';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { NgClass } from '@angular/common';
+import { FavoritesService } from '../../../../shared/services/favorites.service';
 
 @Component({
   selector: 'app-product-card',
   imports: [
     RouterLink,
-    NgClass,
   ],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
@@ -18,8 +18,24 @@ export class ProductCardComponent {
 
   auth = inject(AuthService);
   router = inject(Router);
+  fav = inject(FavoritesService);
 
-  isLiked = signal(false); // To be changed to update by user
+  isLiked = signal<boolean>(false);
+  likedProducts = signal<string[]>([])
+
+  setLikedProducts = effect(() => {
+    this.auth.getLikedProducts().subscribe({
+      next: (res) => {
+        this.likedProducts.set(res.likedProducts ?? []);
+        const id = this.product()?.id!;
+        const liked = !!id && this.likedProducts().includes(id);
+        this.isLiked.set(liked);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  });
 
   toggleLiked(event: MouseEvent): any{
     event.stopPropagation();
@@ -31,7 +47,7 @@ export class ProductCardComponent {
 
     this.auth.likeProduct(this.product()?.id!).subscribe({
       next: (res) => {
-        this.isLiked.set(res.valueOf());
+        this.isLiked.set(res.isLiked);
       },
       error: (err) => {
         console.error(`failed to like product ${this.product()?.title}`, err)

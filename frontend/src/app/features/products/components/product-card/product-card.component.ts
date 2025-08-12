@@ -2,7 +2,6 @@ import { Component, computed, effect, inject, input, signal } from '@angular/cor
 import { Product } from '../../../../shared/models/product.model';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../shared/services/auth.service';
-import { NgClass } from '@angular/common';
 import { FavoritesService } from '../../../../shared/services/favorites.service';
 
 @Component({
@@ -24,6 +23,10 @@ export class ProductCardComponent {
   likedProducts = signal<string[]>([])
 
   setLikedProducts = effect(() => {
+    if(!this.auth.isLoggedIn()){
+      return;
+    }
+    
     this.auth.getLikedProducts().subscribe({
       next: (res) => {
         this.likedProducts.set(res.likedProducts ?? []);
@@ -41,7 +44,7 @@ export class ProductCardComponent {
     event.stopPropagation();
 
     if(!this.auth.isLoggedIn()){
-      this.router.navigate(['/login']);;
+      this.router.navigate(['/login']);
       return;
     }
 

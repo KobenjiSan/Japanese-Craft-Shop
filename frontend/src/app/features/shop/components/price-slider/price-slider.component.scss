@@ -1,0 +1,56 @@
+/* Base slider track reset */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Track (Chrome/Safari) */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 0; 
+  background: transparent;
+}
+
+/* Thumb (Chrome/Safari) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto; 
+  height: 1.25rem; 
+  width: 1.25rem;
+  border-radius: 9999px; 
+  background-color: #F5F1EB; 
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  margin-top: -10px; 
+  transition: box-shadow 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:focus,
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 4px rgb(238, 221, 197, 0.4); 
+}
+
+/* Track (Firefox) */
+input[type="range"]::-moz-range-track {
+  height: 0;
+  background: transparent;
+}
+
+/* Thumb (Firefox) */
+input[type="range"]::-moz-range-thumb {
+  pointer-events: auto;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 9999px;
+  background-color: #F5F1EB; 
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+
+input[type="range"]::-moz-range-thumb:focus,
+input[type="range"]::-moz-range-thumb:hover {
+  box-shadow: 0 0 0 4px rgb(238, 221, 197, 0.4); 
+}

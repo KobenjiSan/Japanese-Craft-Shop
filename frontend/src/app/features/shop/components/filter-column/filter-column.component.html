@@ -1,0 +1,40 @@
+<div class="flex flex-col gap-6">
+    <h1 class="text-xl font-bold">FILTER</h1>
+    <div>
+        <app-price-slider 
+            (minPrice)="onMinPriceChange($event)"
+            (maxPrice)="onMaxPriceChange($event)"
+        />
+    </div>
+    <div>
+        <ul class="flex flex-col gap-5">
+            <li>
+                <button 
+                    class="flex gap-2 cursor-pointer w-fit nav-link {{this.filterNew() ? 'font-bold underline' : ''}}"
+                    (click)="onFilterByNew()"
+                >
+                    <img src="browse_gallery_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                    Newest Items
+                </button>
+            </li>
+            <li>
+                <button 
+                    class="flex gap-2 cursor-pointer w-fit nav-link {{this.filterStock() ? 'font-bold underline' : ''}}"
+                    (click)="onFilterByStock()"    
+                >
+                    <img src="calendar_clock_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                    Limited Stock
+                </button>
+            </li>
+            <li>
+                <button 
+                    class="flex gap-2 cursor-pointer w-fit nav-link {{this.filterFeatured() ? 'font-bold underline' : ''}}"
+                    (click)="onFilterByFeatured()"    
+                >
+                    <img src="workspace_premium_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+                    Featured Items
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

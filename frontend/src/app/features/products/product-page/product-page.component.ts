@@ -1,19 +1,19 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../features/products/product.service';
-import { Product } from '../../shared/models/product.model';
 import { UpperCasePipe } from '@angular/common';
-import { AuthService } from '../../shared/services/auth.service';
+import { Product } from '../../../shared/models/product.model';
+import { AuthService } from '../../../shared/services/auth.service';
+import { ProductService } from '../product.service';
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-product-page',
   imports: [
     UpperCasePipe
   ],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.scss'
+  templateUrl: './product-page.component.html',
+  styleUrl: './product-page.component.scss'
 })
-export class ProductComponent {
+export class ProductPageComponent {
 
   product = signal<Product | null>(null); // cheating
   currentImage = signal<string>('');
@@ -48,6 +48,10 @@ export class ProductComponent {
   likedProducts = signal<string[]>([])
 
   setLikedProducts = effect(() => {
+    if(!this.auth.isLoggedIn()){
+      return;
+    }
+    
     this.auth.getLikedProducts().subscribe({
       next: (res) => {
         this.likedProducts.set(res.likedProducts ?? []);

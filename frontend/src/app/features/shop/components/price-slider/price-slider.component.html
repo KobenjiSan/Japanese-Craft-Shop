@@ -1,0 +1,41 @@
+<div class="flex flex-col gap-2 w-full max-w-md">
+    <label>Price Range (USD)</label>
+    <!-- Slider container -->
+    <div class="relative w-full h-2">
+        <!-- Background rail -->
+        <div class="absolute w-full h-1 bg-brand-light rounded-full"></div>
+
+        <!-- Filled range segment -->
+        <div
+            class="absolute h-2 bg-secondary-dark rounded-full"
+            [style.left.%]="((low() - min) / (max - min)) * 100"
+            [style.width.%]="((high() - low()) / (max - min)) * 100"
+        >
+        </div>
+
+        <!-- Low thumb input -->
+        <input
+            type="range"
+            [min]="min"
+            [max]="max"
+            [value]="low()"
+            (input)="onLowChange($event)"
+            class="absolute top-0 w-full h-2 appearance-none bg-transparent pointer-events-none" 
+        />
+
+        <!-- High thumb input -->
+        <input
+            type="range"
+            [min]="min"
+            [max]="max"
+            [value]="high()"
+            (input)="onHighChange($event)"
+            class="absolute top-0 w-full h-2 appearance-none bg-transparent pointer-events-none" 
+        />
+            
+    </div>
+    <div class="flex justify-between text-sm">
+        <span>$ {{low()}}.00</span>
+        <span>$ {{high()}}.00</span>
+    </div>
+</div>

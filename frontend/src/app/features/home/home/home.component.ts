@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FeaturedDisplayComponent } from '../../features/products/featured-display/featured-display.component';
+import { FeaturedDisplayComponent } from '../../products/featured-display/featured-display.component';
 
 @Component({
   selector: 'app-home',

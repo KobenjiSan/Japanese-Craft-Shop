@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-category-nav',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './category-nav.component.scss'
 })
 export class CategoryNavComponent {
-  
+  category = output<string>();
+
+  onSetCategory(category: string){
+    this.category.emit(category);
+  }
 }

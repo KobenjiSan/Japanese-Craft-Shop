@@ -1,4 +1,5 @@
 using API.src.Application.Common.DTOs.Products;
+using API.src.Application.Common.Pagination;
 using API.src.Application.Queries.Products.GetAllProducts;
 using API.src.Application.Queries.Products.GetProductById;
 using MediatR;
@@ -20,9 +21,30 @@ namespace API.src.Api.Controllers.Products
 
         // GET /api/products
         [HttpGet]
-        public async Task<ActionResult<List<ProductResponseDto>>> GetAllProductsAsync() // TODO : Add PFS later
+        public async Task<ActionResult<PaginatedResult<ProductResponseDto>>> GetAllProductsAsync(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? category = null,
+            [FromQuery] int minPrice = 0,
+            [FromQuery] int maxPrice = 150,
+            [FromQuery] bool stock = false,
+            [FromQuery] bool featured = false,
+            [FromQuery] bool newest = false
+            // TODO: Add search 
+            // TODO: Add sort direction
+        )
         {
-            var query = new GetAllProductsQuery { };
+            var query = new GetAllProductsQuery
+            {
+                Page = page,
+                PageSize = pageSize,
+                Category = category,
+                MinimumPrice = minPrice,
+                MaximumPrice = maxPrice,
+                SortNewest = newest,
+                FilterStock = stock,
+                FilterFeatured = featured    
+            };
             var result = await _mediator.Send(query);
             return Ok(result); 
         }

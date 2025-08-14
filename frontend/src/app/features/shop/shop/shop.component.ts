@@ -26,26 +26,44 @@ export class ShopComponent {
   });
 
   onSetCategory(category: string){
-    console.log('category', category);
+    this.filters.update(f => ({
+      ...f,
+      category: category
+    }));
   }
 
   onSetMinPrice(minPrice: number){
-    console.log('min price', minPrice);
+    this.filters.update(f => ({
+      ...f,
+      minPrice: minPrice
+    }));
   }
 
   onSetMaxPrice(maxPrice: number){
-    console.log('max price', maxPrice);
+    this.filters.update(f => ({
+      ...f,
+      maxPrice: maxPrice
+    }));
   }
 
   onSetNewFilter(toggle: boolean){
-    console.log('filter newest', toggle);
+    this.filters.update(f => ({
+      ...f,
+      byNewest: toggle
+    }));
   }
 
   onSetStockFilter(toggle: boolean){
-    console.log('filter stock', toggle);
+    this.filters.update(f => ({
+      ...f,
+      byStock: toggle
+    }));
   }
 
   onSetFeaturedFilter(toggle: boolean){
-    console.log('filter featured', toggle);
+    this.filters.update(f => ({
+      ...f,
+      byFeatured: toggle
+    }));
   }
 }

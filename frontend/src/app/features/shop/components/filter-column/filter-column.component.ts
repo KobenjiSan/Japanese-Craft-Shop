@@ -39,12 +39,10 @@ export class FilterColumnComponent {
   }
 
   onMinPriceChange(minPrice: number){
-    // console.log('Min price', minPrice);
     this.minPriceFilter.emit(minPrice);
   }
 
   onMaxPriceChange(maxPrice: number){
-    // console.log('Max price', maxPrice);
     this.maxPriceFilter.emit(maxPrice);
   }
 }

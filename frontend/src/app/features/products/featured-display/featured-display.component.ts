@@ -17,7 +17,7 @@ export class FeaturedDisplayComponent {
 
   readonly loadProductsEffect = effect(() => {
     this.productService.getAllProducts().subscribe({
-      next: (data) => {this.products.set(data)},
+      next: (data) => {this.products.set(data.items)},
       error: (err) => {
         console.error("Error fetching chapters", err);
         // TODO: add ToastR error

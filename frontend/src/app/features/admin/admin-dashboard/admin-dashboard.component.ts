@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import { AdminNavColumnComponent } from '../components/admin-nav-column/admin-nav-column.component';
+import { AdminProductDisplayComponent } from '../components/admin-product-display/admin-product-display.component';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [],
+  imports: [
+    AdminNavColumnComponent,
+    AdminProductDisplayComponent,
+  ],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })

@@ -1,39 +1,17 @@
-import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { ProductCreateFormComponent } from '../product-create-form/product-create-form.component';
+import { ProductCardComponent } from '../../../products/components/product-card/product-card.component';
+import { Product } from '../../../../shared/models/product.model';
 
 @Component({
   selector: 'app-admin-product-display',
   imports: [
-    ReactiveFormsModule,
+    ProductCreateFormComponent,
+    ProductCardComponent,
   ],
   templateUrl: './admin-product-display.component.html',
   styleUrl: './admin-product-display.component.scss'
 })
 export class AdminProductDisplayComponent {
-  fb = inject(FormBuilder);
-
-  selectedCategory = signal('');
-
-  createProductForm = this.fb.group({
-    title: ['', Validators.required],
-    description: ['', Validators.required],
-    price: [, Validators.required],
-    images: ['', Validators.required],
-    category: ['', Validators.required],
-    isFeatured: [false, Validators.required],
-    stock: [, Validators.required]
-  });
-
-  onSubmit(){
-    
-  }
-
-  markCategory(category: string){
-    this.createProductForm.get('category')?.setValue(category);
-  }
-
-  markFeatured(){
-    this.createProductForm.get('isFeatured')?.setValue(!this.createProductForm.get('isFeatured')?.value);
-    console.log(this.createProductForm.get('isFeatured')?.value);
-  }
+  exampleProduct = signal<Product | null>(null);
 }

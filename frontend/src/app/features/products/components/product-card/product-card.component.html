@@ -1,14 +1,20 @@
 <div 
     class="{{sizeConfig.mainWidth}} text-brand-dark contain-content 
         hover:cursor-pointer transition-all duration-500 ease-in-out hover:scale-[1.015]" 
-    [routerLink]="['/product', product()?.id]"
+    (click)="onLink()"
 >
     <div class="relative {{sizeConfig.imgHeight}} flex justify-end">
-        <img 
-            [src]="product()?.imageUrls?.at(0)" 
-            alt="Product {{product()?.title }} image"
-            class="w-full h-full object-cover absolute inset-0 -z-10 rounded-t-sm"
-        />
+        @if(product()?.imageUrls?.at(0)){
+            <img 
+                [src]="product()?.imageUrls?.at(0)" 
+                alt="Product {{product()?.title }} image"
+                class="w-full h-full object-cover absolute inset-0 -z-10 rounded-t-sm"
+            />
+        } @else {
+            <div class="w-full h-full object-cover absolute inset-0 -z-10 rounded-t-sm">
+                <p class="text-brand-light h-full text-center place-content-center">No image found.</p>
+            </div>
+        }
         <div class="z-10">
             <button class="my-1 mx-1 {{sizeConfig.heartSize}} nav-link hover:scale-125 active:scale-90"
                 (click)="toggleLiked($event)"

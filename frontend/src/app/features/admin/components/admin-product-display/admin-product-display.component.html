@@ -1,103 +1,23 @@
 <div class="px-4">
     <h1 class="text-4xl font-bold">Products</h1>
-
-    <div class="border-2 border-primary-light w-8/12">
-        <h1 class="text-2xl font-bold mx-4 my-2">Create Product</h1>
-        <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()" class="mx-8 my-2">
-            <div class="flex justify-between">
-                <input 
-                    type="text" 
-                    placeholder="Title" 
-                    formControlName="title"
-                    class="bg-brand-dark px-2 text-xl focus:border-none focus:outline-none" 
-                />
-                <div class="flex my-4 gap-2">
-                    <button 
-                        type="button"
-                        (click)="markFeatured()"
-                        class="place-self-center border-2 border-brand-light w-4 h-4 {{ createProductForm.get('isFeatured')?.value == true ? 'bg-brand-light' : '' }}" 
-                    ></button>
-                    <label class="text-xl">Featured</label>
+    <div class="flex w-full gap-10">
+        <div class="max-w-[50%] contain-content">
+            <app-product-create-form 
+                (exProduct)="exampleProduct.set($event)"
+            />
+        </div>
+        <div>
+            <div class="border-2 border-primary-light py-2 px-4">
+                <h1 class="font-bold text-xl mb-4">Preview Card</h1>
+                <div class="shadow-inner shadow-black">
+                    <app-product-card 
+                        [product]="exampleProduct()!"
+                        [clickable]="false"
+                        [size]="'large'" 
+                    />
                 </div>
             </div>
-            <div class="border-2 border-brand-light mt-2 mb-6">
-                <textarea 
-                    placeholder="Description" 
-                    formControlName="description"
-                    class="bg-brand-dark w-full p-2 focus:border-none focus:outline-none" 
-                ></textarea>
-            </div>
-            <div class="border-2 border-brand-light my-6 flex">
-                <label class="place-self-center p-2">Price</label>
-                <input 
-                    type="number" 
-                    placeholder="00.00" 
-                    formControlName="price"
-                    class="bg-brand-dark w-full p-2 focus:border-none focus:outline-none" 
-                />
-            </div>
-            <div class="border-2 border-brand-light my-6 flex">
-                <label class="place-self-center p-2">Stock</label>
-                <input 
-                    type="number" 
-                    placeholder="0" 
-                    formControlName="stock"
-                    class="bg-brand-dark w-full p-2 focus:border-none focus:outline-none" 
-                />
-            </div>
-            <div class=" my-6">
-                <label>Select Category</label>
-                <div class="flex gap-2 mt-2">
-                    <!-- TODO: make this a @for -->
-                    <button 
-                        type="button"
-                        class="cat-btn {{ createProductForm.get('category')?.value == 'pottery' ? 'bg-brand-light text-brand-dark' : '' }}" 
-                        (click)="markCategory('pottery')"
-                    >
-                        Pottery
-                    </button>
-                    <button 
-                        type="button"
-                        class="cat-btn {{ createProductForm.get('category')?.value == 'textile' ? 'bg-brand-light text-brand-dark' : '' }}" 
-                        (click)="markCategory('textile')"
-                    >
-                        Textile
-                    </button>
-                    <button 
-                        type="button"
-                        class="cat-btn {{ createProductForm.get('category')?.value == 'wood' ? 'bg-brand-light text-brand-dark' : '' }}" 
-                        (click)="markCategory('wood')"
-                    >
-                        Wood Craft
-                    </button>
-                    <button 
-                        type="button"
-                        class="cat-btn {{ createProductForm.get('category')?.value == 'paper' ? 'bg-brand-light text-brand-dark' : '' }}" 
-                        (click)="markCategory('paper')"
-                    >
-                        Paper Craft
-                    </button>
-                    <button 
-                        type="button"
-                        class="cat-btn {{ createProductForm.get('category')?.value == 'metalwork' ? 'bg-brand-light text-brand-dark' : '' }}" 
-                        (click)="markCategory('metalwork')"
-                    >
-                        Metalwork
-                    </button>
-                    <button 
-                        type="button"
-                        class="cat-btn {{ createProductForm.get('category')?.value == 'art' ? 'bg-brand-light text-brand-dark' : '' }}" 
-                        (click)="markCategory('art')"
-                    >
-                        Arts
-                    </button>
-                </div>
-            </div>
-            
-            <div class="border-2 border-primary-light">
-                <label class="p-2 my-2">Add Images</label>
-                <div></div>
-            </div>
-        </form> 
+        </div>
     </div>
+    
 </div>

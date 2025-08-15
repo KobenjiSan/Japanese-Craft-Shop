@@ -35,7 +35,7 @@
     <img [src]="currentImage()" alt="temp" class="w-fit">
     </div>
     <div class="w-2/12 flex flex-col gap-4 mt-4 items-end">
-        @for(image of product()?.imageUrls; track product()?.imageUrls?.findIndex){
+        @for(image of product()?.imageUrls; track $index){
             <div class="w-1/2">
                 <button (click)="setImage(image)">
                     <img 

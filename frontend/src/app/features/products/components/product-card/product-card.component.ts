@@ -14,6 +14,7 @@ import { FavoritesService } from '../../../../shared/services/favorites.service'
 })
 export class ProductCardComponent {
   product = input<Product>();
+  clickable = input<boolean>(true);
 
   auth = inject(AuthService);
   router = inject(Router);
@@ -57,6 +58,10 @@ export class ProductCardComponent {
       }
     });
   };
+
+  onLink(){
+    if(this.clickable()) this.router.navigate(['/product', this.product()?.id]);
+  }
 
   // Dynamic Sizing Logic
   // TODO: look into ngClass

@@ -6,9 +6,7 @@ import { FavoritesService } from '../../../../shared/services/favorites.service'
 
 @Component({
   selector: 'app-product-card',
-  imports: [
-    RouterLink,
-  ],
+  imports: [],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
 })

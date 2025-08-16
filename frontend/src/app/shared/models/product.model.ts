@@ -8,5 +8,5 @@ export interface Product{
     isFeatured: boolean;
     stock: number;
     lastUpdated: Date;
-    CreatedAt: Date;
+    createdAt: Date;
 }

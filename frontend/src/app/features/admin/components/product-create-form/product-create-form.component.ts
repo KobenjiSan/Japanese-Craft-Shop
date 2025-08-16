@@ -47,7 +47,7 @@ export class ProductCreateFormComponent {
       isFeatured: false,
       stock: 0,
       lastUpdated: new Date(),
-      CreatedAt: new Date(),
+      createdAt: new Date(),
   }));
 
   // Auto emit when outputProduct() updates

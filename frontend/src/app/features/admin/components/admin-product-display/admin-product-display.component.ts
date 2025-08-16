@@ -2,12 +2,14 @@ import { Component, signal } from '@angular/core';
 import { ProductCreateFormComponent } from '../product-create-form/product-create-form.component';
 import { ProductCardComponent } from '../../../products/components/product-card/product-card.component';
 import { Product } from '../../../../shared/models/product.model';
+import { ProductListDisplayComponent } from '../../../products/product-list-display/product-list-display.component';
 
 @Component({
   selector: 'app-admin-product-display',
   imports: [
     ProductCreateFormComponent,
     ProductCardComponent,
+    ProductListDisplayComponent,
   ],
   templateUrl: './admin-product-display.component.html',
   styleUrl: './admin-product-display.component.scss'

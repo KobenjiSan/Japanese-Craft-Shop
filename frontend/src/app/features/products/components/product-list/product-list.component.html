@@ -1,0 +1,34 @@
+<div 
+    class="w-full h-16 shadow-sm shadow-black nav-link hover:font-normal cursor-pointer
+            {{selected() ? 'bg-secondary text-brand-dark' : ''}}" 
+    (click)="onSelect()"
+>
+    <div class="flex flex-row p-2">
+        <div class="w-3/12 block-logic">
+            <h1 class="font-bold center-left">{{product()?.title}}</h1>
+        </div>
+        <div class="w-2/12 block-logic">
+            <p class="italic center-left">{{product()?.category}}</p>
+        </div>
+        <div class="w-1/12 block-logic">
+            <p class="center-left">{{product()?.price}}</p>
+        </div>
+        <div class="w-1/12 block-logic">
+            <p class="center-left">{{product()?.stock}}</p>
+        </div>
+        <div class="w-4/12 flex flex-col h-full block-logic">
+            <p>Created: {{product()?.createdAt | date:'MMM d, y'}}</p>
+            <p>Last Update: {{product()?.lastUpdated | date:'MMM d, y'}}</p>
+        </div>
+        <div class="w-1/12 block-logic">
+            <!-- TODO: find a way to change color -->
+            @if(product()?.isFeatured){
+                <img 
+                    src="workspace_premium_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" 
+                    alt="featured product"
+                    class="flex place-self-end h-2/3"
+                >
+            }
+        </div>
+    </div>
+</div>

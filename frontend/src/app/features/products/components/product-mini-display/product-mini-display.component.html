@@ -1,0 +1,70 @@
+<div class="mx-8 w-auto min-h-full border border-primary-light p-4">
+    @if(this.product() != null){ 
+        <h3 class="text-sm text-neutral-600 mb-2">ID: {{this.product()?.id}}</h3>
+        <div class="flex justify-between">
+            <h1 class="text-2xl font-bold">{{this.product()?.title | uppercase}}</h1>
+            <div class="flex gap-1">
+                @if(product()?.isFeatured){
+                    <h2 class="place-self-end text-lg font-bold">FEATURED</h2>
+                    <img 
+                        src="workspace_premium_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" 
+                        alt="featured product image"
+                    >
+                }
+            </div>
+        </div>
+        <div class="mt-4">
+        <p>{{this.product()?.description}}</p>
+        </div>
+        <div class="flex mt-4">
+            <div class="flex flex-col w-2/5 text-lg">
+                <label class="my-2">
+                    <h3 class="font-bold text-xl">Product Price</h3>
+                    <p>${{this.product()?.price}}</p>
+                </label>
+                <label class="my-2">
+                    <h3 class="font-bold text-xl">Product Category</h3>
+                    <p>{{this.product()?.category}}</p>
+                </label>
+                <label class="my-2">
+                    <h3 class="font-bold text-xl">Product Stock</h3>
+                    <p>{{this.product()?.stock}}</p>
+                </label>
+                <label class="my-2">
+                    <h3 class="font-bold text-xl">Created</h3>
+                    <p>{{this.product()?.createdAt | date:'MMM d, y'}}</p>
+                </label>
+                <label class="my-2">
+                    <h3 class="font-bold text-xl">Last Updated</h3>
+                    <p>{{this.product()?.lastUpdated | date:'MMM d, y'}}</p>
+                </label>
+            </div>
+            <div class="flex flex-col gap-2 w-3/5 p-4">
+                <div class="grid grid-cols-1 2xl:grid-cols-2 grid-flow-row justify-items-center gap-2">
+                    @for(image of product()?.imageUrls; track $index){
+                        <img 
+                            src="{{image}}" 
+                            alt="{{this.product()?.title}} product image {{$index + 1}}" 
+                            class="w-28 2xl:w-auto"    
+                        />
+                    }
+                </div>
+            </div>
+        </div>
+        <hr class="border-primary-light" />
+        <div class="mt-4">
+            <h3 class="font-bold text-xl">Liked By:</h3>  
+            <!-- temp (for reference) -->
+            <div class="flex flex-col gap-2 mt-2">
+                <div class="w-full h-8 shadow-sm shadow-black py-1">
+                    <div class="flex flex-row justify-between px-3">
+                        <h1 class="place-self-center">random_user123</h1>
+                        <h1 class="text-neutral-600 text-xs place-self-center">ID: 378ic39d893dadwe</h1>
+                    </div>
+                </div>
+                <div class="w-full h-8 text-center shadow-sm shadow-black">[coming soon]</div>
+            </div>
+            <!---------->
+        </div>
+    }
+</div>

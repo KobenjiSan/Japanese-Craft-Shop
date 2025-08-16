@@ -1,22 +1,39 @@
 import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { Product } from '../../../shared/models/product.model';
-import { ProductService } from '../product.service';
-import { ProductCardComponent } from '../components/product-card/product-card.component';
 import { FilteredProducts } from '../../../shared/models/filtered-products.model';
+import { ProductService } from '../product.service';
+import { ProductListComponent } from '../components/product-list/product-list.component';
+import { ProductMiniDisplayComponent } from '../components/product-mini-display/product-mini-display.component';
 
 @Component({
-  selector: 'app-product-display',
-  imports: [ProductCardComponent],
-  templateUrl: './product-display.component.html',
-  styleUrl: './product-display.component.scss'
+  selector: 'app-product-list-display',
+  imports: [
+    ProductListComponent,
+    ProductMiniDisplayComponent,
+  ],
+  templateUrl: './product-list-display.component.html',
+  styleUrl: './product-list-display.component.scss'
 })
-export class ProductDisplayComponent {
+export class ProductListDisplayComponent {
   products = signal<Product[]>([]);
+
+  selectedProduct = signal<Product | null>(null);
+  updateSelected(selected: Product){
+    this.selectedProduct.set(selected);
+  }
+
+  checkSelected(id: string): boolean{
+    if(id === this.selectedProduct()?.id){
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   filters = input<FilteredProducts>();
 
   currentPage = signal(1);
-  pageSize = signal(10);
+  pageSize = signal(25);
   totalPages = signal(1);
 
   productService = inject(ProductService);

@@ -21,5 +21,21 @@ namespace API.src.Application.Services.Products
             await _productCollection.InsertOneAsync(product);
             return product;
         }
+
+        public async Task UpdateLikedByUserAsync(string userId, string productId, bool isLiked)
+        {
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, productId);
+
+            if (isLiked)
+            {
+                var addUser = Builders<Product>.Update.AddToSet(p => p.LikedByUserIds, userId);
+                await _productCollection.UpdateOneAsync(filter, addUser);
+            }
+            else
+            {
+                var removeUser = Builders<Product>.Update.Pull(p => p.LikedByUserIds, userId);
+                await _productCollection.UpdateOneAsync(filter, removeUser);
+            }
+        }
     }
 }

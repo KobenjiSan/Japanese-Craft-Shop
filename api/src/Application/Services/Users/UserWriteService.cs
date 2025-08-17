@@ -20,12 +20,20 @@ namespace API.src.Application.Services.Users
             await _usersCollection.InsertOneAsync(user);
         }
 
-        public async Task<bool> TryLikeProductAsync(string userId, string productId)
+        public async Task<bool> ToggleLikeProductAsync(string userId, string productId)
         {
             var filter = Builders<User>.Filter.Eq(u => u.Id, userId);
-            var update = Builders<User>.Update.AddToSet(u => u.LikedProductIds, productId);
-            var result = await _usersCollection.UpdateOneAsync(filter, update);
-            return result.ModifiedCount == 0;
+
+            var addLike = Builders<User>.Update.AddToSet(u => u.LikedProductIds, productId);
+            var tryLike = await _usersCollection.UpdateOneAsync(filter, addLike);
+            if (tryLike.ModifiedCount != 0)
+                return true;    // product is added and liked
+            else
+            {
+                var removeLike = Builders<User>.Update.Pull(u => u.LikedProductIds, productId);
+                await _usersCollection.UpdateOneAsync(filter, removeLike);
+                return false;   // product was already liked and is now removed (disliked)
+            }
         }
 
         public async Task UnlikeProductAsync(string userId, string productId)

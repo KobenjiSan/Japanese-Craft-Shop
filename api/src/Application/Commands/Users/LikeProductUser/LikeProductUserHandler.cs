@@ -8,17 +8,21 @@ namespace API.src.Application.Commands.Users.LikedProductUser
     public class LikeProductUserHandler : IRequestHandler<LikeProductUserCommand, LikeProductUserResponseDto>
     {
 
-        private readonly IUserWriteService _writeService;
+        private readonly IUserWriteService _userWriteService;
+        private readonly IProductWriteService _productWriteService;
         private readonly IProductReadService _productReadService;
+
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public LikeProductUserHandler(
-            IUserWriteService writeService,
+            IUserWriteService userWriteService,
+            IProductWriteService productWriteService,
             IProductReadService productReadService,
             IHttpContextAccessor httpContextAccessor
         )
         {
-            _writeService = writeService;
+            _userWriteService = userWriteService;
+            _productWriteService = productWriteService;
             _productReadService = productReadService;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -33,11 +37,11 @@ namespace API.src.Application.Commands.Users.LikedProductUser
             if (product == null)
                 throw new NotFoundException("Cannot like non existent product.");
 
-            var alreadyLiked = await _writeService.TryLikeProductAsync(userId, request.ProductId);
-            if (alreadyLiked)
-                await _writeService.UnlikeProductAsync(userId, request.ProductId);
+            var isLikedStatus = await _userWriteService.ToggleLikeProductAsync(userId, request.ProductId);
 
-            return new LikeProductUserResponseDto(!alreadyLiked);
+            await _productWriteService.UpdateLikedByUserAsync(userId, request.ProductId, isLikedStatus);
+
+            return new LikeProductUserResponseDto(isLikedStatus);
         }
     }
 }

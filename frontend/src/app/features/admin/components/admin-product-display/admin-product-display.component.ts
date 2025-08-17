@@ -16,4 +16,10 @@ import { ProductListDisplayComponent } from '../../../products/product-list-disp
 })
 export class AdminProductDisplayComponent {
   exampleProduct = signal<Product | null>(null);
+
+  createdRefreshTick = signal(0);
+
+  onProductCreated(){
+    this.createdRefreshTick.update(v => v + 1);
+  }
 }

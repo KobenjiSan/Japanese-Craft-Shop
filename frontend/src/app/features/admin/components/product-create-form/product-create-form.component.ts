@@ -92,6 +92,8 @@ export class ProductCreateFormComponent {
 
   adminService = inject(AdminService);
 
+  productCreated = output();
+
   onSubmit(){
     // validate form
     if(this.selectedImageFiles.length <= 0 || this.createProductForm.invalid) {
@@ -115,6 +117,7 @@ export class ProductCreateFormComponent {
         console.log('product created!! ', created);
         // TODO: add success message
         this.resetForm();
+        this.productCreated.emit();
       },
       error: (err) => {
         // TODO: add error message

@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { Product } from '../../../shared/models/product.model';
 import { FilteredProducts } from '../../../shared/models/filtered-products.model';
 import { ProductService } from '../product.service';
@@ -15,6 +15,8 @@ import { ProductMiniDisplayComponent } from '../components/product-mini-display/
   styleUrl: './product-list-display.component.scss'
 })
 export class ProductListDisplayComponent {
+  createdRefreshTick = input<number>(0);
+
   products = signal<Product[]>([]);
 
   selectedProduct = signal<Product | null>(null);
@@ -39,6 +41,9 @@ export class ProductListDisplayComponent {
   productService = inject(ProductService);
 
   readonly loadProductsEffect = effect(() => {
+    this.createdRefreshTick();
+    this.productDeleted();
+
     const current = this.currentPage();
     const size = this.pageSize();
     const category = this.filters()?.category;
@@ -58,11 +63,20 @@ export class ProductListDisplayComponent {
       featured: byFeatured,
       newest: byNewest
     }).subscribe({
-      next: (data) => {this.products.set(data.items);},
+      next: (data) => {
+        this.products.set(data.items);
+      },
       error: (err) => {
         console.error("Error fetching chapters", err);
         // TODO: add ToastR error
       }
     });
   });
+
+  productDeleted = signal(0);
+  
+  onDeleteProduct(){
+    this.productDeleted.update(v => v + 1);
+    this.selectedProduct.set(null);
+  }
 }

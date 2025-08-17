@@ -66,5 +66,16 @@
             </div>
             <!---------->
         </div>
+        @if(auth.isAdmin()){
+            <div class="w-full mt-10 flex justify-end">
+                <button 
+                    class="border-2 border-brand-light px-4 py-1 font-bold nav-link
+                        hover:bg-brand-light hover:text-brand-dark"
+                    (click)="onDelete()"
+                >
+                    Delete
+                </button>
+            </div>
+        }
     }
 </div>

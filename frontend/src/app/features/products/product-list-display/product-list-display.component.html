@@ -15,6 +15,7 @@
     <section class="w-1/2">
         <app-product-mini-display
             [product]="selectedProduct()!"
+            (deleted)="onDeleteProduct()"
         />
     </section>
 </div>

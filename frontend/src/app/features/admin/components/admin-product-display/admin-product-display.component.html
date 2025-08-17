@@ -4,6 +4,7 @@
         <div class="max-w-[50%] contain-content">
             <app-product-create-form 
                 (exProduct)="exampleProduct.set($event)"
+                (productCreated)="onProductCreated()"
             />
         </div>
         <div>
@@ -22,6 +23,8 @@
     <!-- <hr class="my-6 border-primary-light" /> -->
     <section>
         <h1 class="w-full text-center text-4xl font-bold mt-16 mb-8">All Products</h1>
-        <app-product-list-display />
+        <app-product-list-display
+            [createdRefreshTick]="this.createdRefreshTick()"
+        />
     </section>
 </div>

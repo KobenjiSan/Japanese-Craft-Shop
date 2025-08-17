@@ -1,6 +1,8 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { Product } from '../../../../shared/models/product.model';
 import { DatePipe, UpperCasePipe } from '@angular/common';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { AdminService } from '../../../admin/admin.service';
 
 @Component({
   selector: 'app-product-mini-display',
@@ -13,4 +15,25 @@ import { DatePipe, UpperCasePipe } from '@angular/common';
 })
 export class ProductMiniDisplayComponent {
   product = input<Product>();
+  deleted = output();
+
+  auth = inject(AuthService);
+  adminService = inject(AdminService);
+
+  onDelete(){
+    const product = this.product();
+    if(!product) return;
+
+    const confirm = window.confirm(`Are you sure you want to delete ${product.title}?`);
+    if(!confirm) return;
+
+    this.adminService.deleteProduct(product.id).subscribe({
+      next: () => {
+        this.deleted.emit();
+      },
+      error: (err) => {
+        console.error(`Failed to delete ${product.title}.`, err);
+      }
+    });
+  }
 }

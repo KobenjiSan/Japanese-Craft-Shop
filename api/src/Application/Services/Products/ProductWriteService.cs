@@ -8,18 +8,23 @@ namespace API.src.Application.Services.Products
 {
     public class ProductWriteService : IProductWriteService
     {
-
-        private readonly IMongoCollection<Product> _productCollection;
+        private readonly IMongoCollection<Product> _productsCollection;
 
         public ProductWriteService(IOptions<MongoDBSettings> settings, IMongoDatabase database)
         {
-            _productCollection = database.GetCollection<Product>(settings.Value.ProductsCollectionName);
+            _productsCollection = database.GetCollection<Product>(settings.Value.ProductsCollectionName);
         }
 
         public async Task<Product> CreateProductAsync(Product product)
         {
-            await _productCollection.InsertOneAsync(product);
+            await _productsCollection.InsertOneAsync(product);
             return product;
+        }
+
+        public async Task DeleteProductAsync(string productId)
+        {
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, productId);
+            await _productsCollection.DeleteOneAsync(filter);
         }
 
         public async Task UpdateLikedByUserAsync(string userId, string productId, bool isLiked)
@@ -29,12 +34,12 @@ namespace API.src.Application.Services.Products
             if (isLiked)
             {
                 var addUser = Builders<Product>.Update.AddToSet(p => p.LikedByUserIds, userId);
-                await _productCollection.UpdateOneAsync(filter, addUser);
+                await _productsCollection.UpdateOneAsync(filter, addUser);
             }
             else
             {
                 var removeUser = Builders<Product>.Update.Pull(p => p.LikedByUserIds, userId);
-                await _productCollection.UpdateOneAsync(filter, removeUser);
+                await _productsCollection.UpdateOneAsync(filter, removeUser);
             }
         }
     }

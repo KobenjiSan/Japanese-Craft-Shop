@@ -20,6 +20,13 @@ namespace API.src.Application.Services.Users
             await _usersCollection.InsertOneAsync(user);
         }
 
+        public async Task RemoveProductFromAllUsers(string productId)
+        {
+            var filter = Builders<User>.Filter.AnyEq(u => u.LikedProductIds, productId);
+            var update = Builders<User>.Update.Pull(u => u.LikedProductIds, productId);
+            await _usersCollection.UpdateManyAsync(filter, update);
+        }
+
         public async Task<bool> ToggleLikeProductAsync(string userId, string productId)
         {
             var filter = Builders<User>.Filter.Eq(u => u.Id, userId);

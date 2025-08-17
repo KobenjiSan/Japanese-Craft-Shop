@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using API.src.Application.Commands.Products.CreateProduct;
+using API.src.Application.Commands.Products.DeleteProduct;
 using API.src.Application.Common.DTOs.Products;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -42,6 +43,15 @@ namespace API.src.Api.Controllers.Products
                 new { id = createdProduct.Id },
                 createdProduct
             );
+        }
+
+        // DELETE /api/products/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProductAsync([FromRoute] string id)
+        {
+            var command = new DeleteProductCommand { ProductId = id };
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 

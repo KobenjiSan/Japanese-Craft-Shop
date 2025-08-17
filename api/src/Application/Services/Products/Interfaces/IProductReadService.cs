@@ -6,6 +6,7 @@ namespace API.src.Application.Services.Products.Interfaces
     {
         Task<List<Product>> GetAllProductsAsync();
         Task<List<string>> GetImageUrlsByProductIdAsync(string productId);
+        Task<List<string>> GetLikedByList(string productId);
         Task<Product?> GetProductByIdAsync(string productId);
     }
 }

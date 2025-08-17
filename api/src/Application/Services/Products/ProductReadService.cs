@@ -28,6 +28,13 @@ namespace API.src.Application.Services.Products
             return await _productsCollection.Find(filter).Project(projection).FirstOrDefaultAsync();
         }
 
+        public async Task<List<string>> GetLikedByList(string productId)
+        {
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, productId);
+            var projection = Builders<Product>.Projection.Expression(p => p.LikedByUserIds);
+            return await _productsCollection.Find(filter).Project(projection).FirstOrDefaultAsync();
+        }
+
         public async Task<Product?> GetProductByIdAsync(string productId)
         {
             return await _productsCollection.Find(p => p.Id == productId).FirstOrDefaultAsync();

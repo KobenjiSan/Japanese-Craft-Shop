@@ -1,3 +1,8 @@
-export interface likedByUserResponse{
-    likedByUserIds: string[];
+export interface LikedByUserResponse{
+    likedByUserIds: UserToId[];
+}
+
+export interface UserToId{
+    id: string;
+    username: string;
 }

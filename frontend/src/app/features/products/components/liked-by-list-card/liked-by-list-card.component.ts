@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { UserToId } from '../../../../shared/models/liked-by-user.model';
 
 @Component({
   selector: 'app-liked-by-list-card',
@@ -7,5 +8,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './liked-by-list-card.component.scss'
 })
 export class LikedByListCardComponent {
-  userId = input<string>();
+  user = input<UserToId>();
 }

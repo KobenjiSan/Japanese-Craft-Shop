@@ -2,7 +2,7 @@ import { Component, effect, inject, input, signal } from '@angular/core';
 import { Product } from '../../../../shared/models/product.model';
 import { ProductService } from '../../product.service';
 import { LikedByListCardComponent } from '../liked-by-list-card/liked-by-list-card.component';
-import { likedByUserResponse } from '../../../../shared/models/liked-by-user.model';
+import { LikedByUserResponse, UserToId } from '../../../../shared/models/liked-by-user.model';
 
 @Component({
   selector: 'app-liked-by-list-display',
@@ -15,7 +15,7 @@ import { likedByUserResponse } from '../../../../shared/models/liked-by-user.mod
 export class LikedByListDisplayComponent {
   product = input<Product>();
 
-  likedByList = signal<string[]>([]);
+  likedByList = signal<UserToId[]>([]);
 
   productService = inject(ProductService);
 

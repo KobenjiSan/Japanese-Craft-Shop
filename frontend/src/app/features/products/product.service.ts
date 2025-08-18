@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../../shared/models/product.model';
 import { PaginatedResult } from '../../shared/models/paginated-result.model';
-import { likedByUserResponse } from '../../shared/models/liked-by-user.model';
+import { LikedByUserResponse } from '../../shared/models/liked-by-user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ export class ProductService {
     return this.http.get<Product>(`${this.baseUrl}/${id}`);
   }
 
-  getProductLikedByList(id: string): Observable<likedByUserResponse>{
-    return this.http.get<likedByUserResponse>(`${this.baseUrl}/likedByList/${id}`);
+  getProductLikedByList(id: string): Observable<LikedByUserResponse>{
+    return this.http.get<LikedByUserResponse>(`${this.baseUrl}/likedByList/${id}`);
   }
 }

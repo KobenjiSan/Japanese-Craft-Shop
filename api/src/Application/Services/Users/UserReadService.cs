@@ -42,5 +42,16 @@ namespace API.src.Application.Services.Users
             var projection = Builders<User>.Projection.Expression(u => u.LikedProductIds);
             return await _usersCollection.Find(filter).Project(projection).FirstOrDefaultAsync();
         }
+
+        public async Task<List<UserToId>> GetListUsersByIdsAsync(List<string> userIds)
+        {
+            var filter = Builders<User>.Filter.In(u => u.Id, userIds);
+            var projection = Builders<User>.Projection.Expression(u => new UserToId
+            {
+                Id = u.Id,
+                Username = u.Username
+            });
+            return await _usersCollection.Find(filter).Project(projection).ToListAsync();
+        }
     }
 }

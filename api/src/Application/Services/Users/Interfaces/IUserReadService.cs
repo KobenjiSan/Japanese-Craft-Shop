@@ -8,5 +8,6 @@ namespace API.src.Application.Services.Users.Interfaces
         Task<User?> GetUserByIdentifierAsync(string identifier);
         Task<bool> UsernameExistsAsync(string username);
         Task<List<string>> GetAllLikedByUserAsync(string userId);
+        Task<List<UserToId>> GetListUsersByIdsAsync(List<string> userIds);
     }
 }

@@ -5,7 +5,7 @@
     @for(user of likedByList(); track $index){
         <div class="flex flex-col gap-2 mt-2">
             <app-liked-by-list-card 
-                [userId]="user"
+                [user]="user"
             />
         </div>
     }

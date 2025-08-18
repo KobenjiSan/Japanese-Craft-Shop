@@ -54,17 +54,9 @@
         <hr class="border-primary-light" />
         <div class="mt-4">
             <h3 class="font-bold text-xl">Liked By:</h3>  
-            <!-- temp (for reference) -->
-            <div class="flex flex-col gap-2 mt-2">
-                <div class="w-full h-8 shadow-sm shadow-black py-1">
-                    <div class="flex flex-row justify-between px-3">
-                        <h1 class="place-self-center">random_user123</h1>
-                        <h1 class="text-neutral-600 text-xs place-self-center">ID: 378ic39d893dadwe</h1>
-                    </div>
-                </div>
-                <div class="w-full h-8 text-center shadow-sm shadow-black">[coming soon]</div>
-            </div>
-            <!---------->
+            <app-liked-by-list-display
+              [product]="this.product()"  
+            />
         </div>
         @if(auth.isAdmin()){
             <div class="w-full mt-10 flex justify-end">

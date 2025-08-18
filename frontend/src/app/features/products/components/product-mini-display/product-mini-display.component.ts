@@ -3,12 +3,14 @@ import { Product } from '../../../../shared/models/product.model';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { AdminService } from '../../../admin/admin.service';
+import { LikedByListDisplayComponent } from '../liked-by-list-display/liked-by-list-display.component';
 
 @Component({
   selector: 'app-product-mini-display',
   imports: [
     UpperCasePipe,
     DatePipe,
+    LikedByListDisplayComponent,
   ],
   templateUrl: './product-mini-display.component.html',
   styleUrl: './product-mini-display.component.scss'

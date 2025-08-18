@@ -1,0 +1,12 @@
+@if(product() != null && likedByList().length > 0){
+    <div class="pb-4">
+        <h2 class="text-lg">Total Likes: <strong>{{likedByList().length}}</strong></h2>
+    </div>
+    @for(user of likedByList(); track $index){
+        <div class="flex flex-col gap-2 mt-2">
+            <app-liked-by-list-card 
+                [userId]="user"
+            />
+        </div>
+    }
+}

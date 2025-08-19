@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product } from '../../../../shared/models/product.model';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AdminService } from '../../admin.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-create-form',
@@ -94,10 +95,12 @@ export class ProductCreateFormComponent {
 
   productCreated = output();
 
+  toastr = inject(ToastrService);
+
   onSubmit(){
     // validate form
     if(this.selectedImageFiles.length <= 0 || this.createProductForm.invalid) {
-      console.error("Invalid form");
+      this.toastr.error('Invalid form.')
       return;
     } 
 
@@ -114,13 +117,11 @@ export class ProductCreateFormComponent {
 
     this.adminService.createProduct(formData).subscribe({
       next: (created) => {
-        console.log('product created!! ', created);
-        // TODO: add success message
+        this.toastr.success(`Created: ${created.title}`);
         this.resetForm();
         this.productCreated.emit();
       },
       error: (err) => {
-        // TODO: add error message
         console.error('error creating product', err);
       } 
     });

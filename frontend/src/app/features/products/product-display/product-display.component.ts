@@ -41,10 +41,11 @@ export class ProductDisplayComponent {
       featured: byFeatured,
       newest: byNewest
     }).subscribe({
-      next: (data) => {this.products.set(data.items);},
+      next: (data) => {
+        this.products.set(data.items);
+      },
       error: (err) => {
         console.error("Error fetching chapters", err);
-        // TODO: add ToastR error
       }
     });
   });

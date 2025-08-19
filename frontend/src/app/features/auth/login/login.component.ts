@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,8 @@ export class LoginComponent {
   router = inject(Router);
   auth = inject(AuthService);
   fb = inject(FormBuilder);
+
+  toastr = inject(ToastrService);
   
 
   loginForm = this.fb.group({
@@ -22,7 +25,8 @@ export class LoginComponent {
 
   onSubmit(){
     if(this.loginForm.invalid){
-      // TODO add UX validations later
+      this.loginForm.markAllAsTouched();
+      this.toastr.error('Login fields cannot be blank.');
       return;
     }
 
@@ -36,7 +40,6 @@ export class LoginComponent {
       },
       error: (err) => {
         console.error('Login failed', err);
-        // TODO: show user-facing error later
       }
     });
   }

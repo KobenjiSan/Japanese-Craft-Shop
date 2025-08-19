@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,8 @@ export class RegisterComponent {
   router = inject(Router);
   auth = inject(AuthService);
   fb = inject(FormBuilder);
+
+  toastr = inject(ToastrService);
   
 
   registerForm = this.fb.group({
@@ -23,7 +26,8 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if(this.registerForm.invalid){
-      // TODO add UX validations later
+      this.registerForm.markAllAsTouched();
+      this.toastr.error('Registration fields cannot be blank.');
       return;
     }
 
@@ -31,7 +35,7 @@ export class RegisterComponent {
 
     this.auth.register(username!, email!, password!).subscribe({
       next: () => {
-        // TODO add toaster success message
+        this.toastr.success('Registration Successful!')
         this.router.navigate(['/login']);
       },
       error: (err) => {console.error(err);}

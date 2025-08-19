@@ -21,3 +21,45 @@ body {
 .btn-ux {
     @apply interaction-effects hover:scale-105 hover:cursor-pointer active:scale-95;
 }
+
+// Toastr
+
+.toast-bottom-right{
+    @apply fixed bottom-2 right-2 z-[9999] w-auto max-w-sm
+}
+
+@keyframes dropFade {
+  from {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-dropFade {
+  animation: dropFade 0.35s ease-out;
+}
+
+.toast-container .ngx-toastr {
+  @apply text-white shadow-lg px-5 py-2 text-xs flex justify-between items-center gap-2;
+
+  font-family: inherit;
+  line-height: 1.4;
+  min-height: auto;
+}
+
+.toast-error {
+  @apply border-4 border-red-700;
+}
+
+.toast-success {
+  @apply border-4 border-green-700;
+}
+
+.toast-close-button {
+  @apply  text-white text-xl cursor-pointer hover:text-neutral-300;
+  position: relative;
+}

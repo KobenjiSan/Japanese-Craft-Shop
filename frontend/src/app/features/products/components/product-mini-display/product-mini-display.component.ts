@@ -4,6 +4,7 @@ import { DatePipe, UpperCasePipe } from '@angular/common';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { AdminService } from '../../../admin/admin.service';
 import { LikedByListDisplayComponent } from '../liked-by-list-display/liked-by-list-display.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-mini-display',
@@ -21,6 +22,7 @@ export class ProductMiniDisplayComponent {
 
   auth = inject(AuthService);
   adminService = inject(AdminService);
+  toastr = inject(ToastrService);
 
   onDelete(){
     const product = this.product();
@@ -31,6 +33,7 @@ export class ProductMiniDisplayComponent {
 
     this.adminService.deleteProduct(product.id).subscribe({
       next: () => {
+        this.toastr.success(`Deleted: ${this.product()?.title}`)
         this.deleted.emit();
       },
       error: (err) => {

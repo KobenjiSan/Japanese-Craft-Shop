@@ -1,26 +1,24 @@
 <div class="px-4">
-    <h1 class="text-6xl font-bold">Products</h1>
-    <section class="flex w-full gap-10 mt-4">
-        <div class="max-w-[50%] contain-content">
-            <app-product-create-form 
-                (exProduct)="exampleProduct.set($event)"
-                (productCreated)="onProductCreated()"
-            />
-        </div>
+    <section class="flex justify-between">
         <div>
-            <div class="border-2 border-primary-light py-2 px-4">
-                <h1 class="font-bold text-xl mb-4">Preview Card</h1>
-                <div class="shadow-inner shadow-black">
-                    <app-product-card 
-                        [product]="exampleProduct()!"
-                        [clickable]="false"
-                        [size]="'large'" 
-                    />
-                </div>
-            </div>
+            <h1 class="text-6xl font-bold">Products</h1>
+        </div>
+        <div class="pr-10">
+            <button class="nav-link flex gap-1 border pr-6 pl-3 py-2" (click)="openModal()">
+                <img src="add_24dp_F5F1EB_FILL0_wght400_GRAD0_opsz24.svg" class="place-self-center" />
+                <p class="font-bold text-xl">Create Product</p>
+            </button>
+            <ng-template cdkPortal>
+                <app-product-create-display
+                    (productCreated)="onProductCreated()"
+                    (closeWindow)="closeWindow()"
+                />
+            </ng-template>
         </div>
     </section>
-    <!-- <hr class="my-6 border-primary-light" /> -->
+    <section class="m-4 border-2 border-primary-light h-96">
+        <!-- placeholder -->
+    </section>
     <section>
         <h1 class="w-full text-center text-4xl font-bold mt-16 mb-8">All Products</h1>
         <app-product-list-display

@@ -1,25 +1,49 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { ProductCreateFormComponent } from '../product-create-form/product-create-form.component';
 import { ProductCardComponent } from '../../../products/components/product-card/product-card.component';
 import { Product } from '../../../../shared/models/product.model';
 import { ProductListDisplayComponent } from '../../../products/product-list-display/product-list-display.component';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { CdkPortal, PortalModule } from '@angular/cdk/portal';
+import { ProductCreateDisplayComponent } from "../product-create-display/product-create-display.component";
+
 
 @Component({
   selector: 'app-admin-product-display',
   imports: [
-    ProductCreateFormComponent,
-    ProductCardComponent,
     ProductListDisplayComponent,
-  ],
+    PortalModule,
+    ProductCreateDisplayComponent
+],
   templateUrl: './admin-product-display.component.html',
   styleUrl: './admin-product-display.component.scss'
 })
 export class AdminProductDisplayComponent {
-  exampleProduct = signal<Product | null>(null);
+  overlay = inject(Overlay);
+  @ViewChild(CdkPortal) portal!: CdkPortal;
+
+  overlayRef: any = null;
+  
+  openModal(){
+    const config = new OverlayConfig({
+      positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
+      height: '75%',
+      hasBackdrop: true
+    });
+
+    this.overlayRef = this.overlay.create(config);
+    this.overlayRef.attach(this.portal);
+    this.overlayRef.backdropClick().subscribe(() => this.overlayRef.detach());
+  }
 
   createdRefreshTick = signal(0);
 
   onProductCreated(){
     this.createdRefreshTick.update(v => v + 1);
+    this.overlayRef.detach();
+  }
+
+  closeWindow(){
+    this.overlayRef.detach();
   }
 }

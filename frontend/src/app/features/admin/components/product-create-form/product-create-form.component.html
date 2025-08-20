@@ -1,5 +1,4 @@
 <div class="border-2 border-primary-light w-full max-w-[100%] min-w-0">
-        <h1 class="text-2xl font-bold mx-4 my-2">Create Product</h1>
         <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()" class="mx-4 my-2">
             <div class="flex justify-between">
                 <div class="mt-4">
@@ -167,7 +166,7 @@
                     (click)="resetForm()"
                     class="cat-btn nav-link hover:font-normal"
                 >
-                    Cancel
+                    Reset
                 </button>
                 <button 
                     type="submit"

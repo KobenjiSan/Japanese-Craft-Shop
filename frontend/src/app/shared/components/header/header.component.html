@@ -24,12 +24,21 @@
    
     @if(auth.isLoggedIn()){
         <div class="flex w-28 gap-6 mx-2">
-            <a routerLink="/favorites" class="self-center"> 
-                <img src="love_1.png" alt="Likes Page Link" class="w-10 nav-link hover:scale-90">
-            </a>
-            <a routerLink="/profile" class="self-center">
-                <img src="user_icon.png" class="w-8 nav-link hover:scale-90">
-            </a>
+            @if(auth.isAdmin()){
+                <div class="border border-brand-light pl-2 pr-4 py-1">
+                    <a routerLink="/admin" class="self-center flex gap-2">
+                        <img src="shield_person_24dp_F5F1EB_FILL0_wght400_GRAD0_opsz24.svg">
+                        <p class="font-bold text-lg">Admin</p>
+                    </a>
+                </div>
+            } @else {
+                <a routerLink="/favorites" class="self-center"> 
+                    <img src="love_1.png" alt="Likes Page Link" class="w-10 nav-link hover:scale-90">
+                </a>
+                <a routerLink="/profile" class="self-center">
+                    <img src="user_icon.png" class="w-8 nav-link hover:scale-90">
+                </a>
+            }
         </div>
     } @else {
         <div class="mx-2">

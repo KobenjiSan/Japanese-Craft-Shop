@@ -98,9 +98,8 @@ export class ProductCreateFormComponent {
   toastr = inject(ToastrService);
 
   onSubmit(){
-    // validate form
     if(this.selectedImageFiles.length <= 0 || this.createProductForm.invalid) {
-      this.toastr.error('Invalid form.')
+      this.createProductForm.markAllAsTouched();
       return;
     } 
 

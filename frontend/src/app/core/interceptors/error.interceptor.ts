@@ -8,7 +8,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      if(error.error?.detail){
+      if(error.status === 0){
+        toastr.error('No response from API.')
+      } else if(error.error?.detail){
         toastr.error(error.error.detail);
       } else if (typeof error.error === 'string'){
         toastr.error(error.error);

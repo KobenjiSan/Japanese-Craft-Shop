@@ -27,7 +27,7 @@ export class AdminProductDisplayComponent {
   openModal(){
     const config = new OverlayConfig({
       positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
-      height: '75%',
+      height: '90%',
       hasBackdrop: true
     });
 

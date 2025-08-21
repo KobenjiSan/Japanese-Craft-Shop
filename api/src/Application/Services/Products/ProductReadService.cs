@@ -39,5 +39,11 @@ namespace API.src.Application.Services.Products
         {
             return await _productsCollection.Find(p => p.Id == productId).FirstOrDefaultAsync();
         }
+
+        public async Task<List<Product>> GetProductsFromIds(List<string> productIds)
+        {
+            var filter = Builders<Product>.Filter.In(p => p.Id, productIds);
+            return await _productsCollection.Find(filter).ToListAsync();
+        }
     }
 }

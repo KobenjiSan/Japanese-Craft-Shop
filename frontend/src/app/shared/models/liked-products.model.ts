@@ -1,5 +1,12 @@
+import { Product } from "./product.model";
+
 export interface LikedProducts{
-    likedProducts: string[]
+    likedProductObjs: Product[];
+}
+
+
+export interface LikedProductIds{
+    likedProducts: string[];
 }
 
 export interface LikeResult{

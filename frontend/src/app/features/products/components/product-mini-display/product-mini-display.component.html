@@ -45,7 +45,7 @@
                         <img 
                             src="{{image}}" 
                             alt="{{this.product()?.title}} product image {{$index + 1}}" 
-                            class="w-28 2xl:w-auto"    
+                            class="w-28 2xl:w-auto h-28 2xl:h-auto"    
                         />
                     }
                 </div>
@@ -59,14 +59,24 @@
             />
         </div>
         @if(auth.isAdmin()){
-            <div class="w-full mt-10 flex justify-end">
-                <button 
-                    class="border-2 border-brand-light px-4 py-1 font-bold nav-link
-                        hover:bg-brand-light hover:text-brand-dark"
-                    (click)="onDelete()"
-                >
-                    Delete
-                </button>
+            <div class="w-full mt-10 flex justify-between gap-10">
+                <div class="">
+                    <button 
+                        class="border-2 border-brand-light px-4 py-1 font-bold nav-link
+                            hover:bg-brand-light hover:text-brand-dark"
+                        (click)="onEdit()"
+                    ><p class="place-self-center">Edit</p>
+                    </button>
+                </div>
+                <div class="">
+                    <button 
+                        class="border-2 border-brand-light px-4 py-1 font-bold nav-link
+                            hover:bg-brand-light hover:text-brand-dark"
+                        (click)="onDelete()"
+                    >
+                        Delete
+                    </button>
+                </div>
             </div>
         }
     }

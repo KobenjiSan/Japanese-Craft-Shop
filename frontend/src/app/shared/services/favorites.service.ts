@@ -14,7 +14,7 @@ export class FavoritesService {
 
   load(productId: string) {
     effect(() => {
-      this.auth.getLikedProducts().subscribe({
+      this.auth.getLikedProductIds().subscribe({
         next: (res) => {
           this.likedProducts.set(res.likedProducts ?? []);
           const liked = !!productId && this.likedProducts().includes(productId);

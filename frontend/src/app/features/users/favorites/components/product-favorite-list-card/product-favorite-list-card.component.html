@@ -1,0 +1,24 @@
+<div class="w-full flex justify-between my-6">
+    <div>
+        <h1 class="font-bold text-xl">{{this.product()?.title}}</h1>
+        <p class="text-lg">${{this.product()?.price}}</p>
+        <p class="text-lg italic">{{this.product()?.category}}</p>
+        <div>
+            <button
+                class="px-6 lg:px-8 py-1.5 font-bold border border-neutral-600 text-neutral-600 my-6"
+            >
+                COMING SOON
+            </button>
+        </div>
+        <div class="flex gap-8">
+            <button (click)="onLink()">View item</button>
+            <button>Remove item</button>
+        </div>
+    </div>
+    <div class="place-self-center pr-20">
+        <img src="{{this.product()!.imageUrls[0]}}" alt="{{this.product()?.title}} image" class="w-48">
+    </div>
+</div>
+
+
+

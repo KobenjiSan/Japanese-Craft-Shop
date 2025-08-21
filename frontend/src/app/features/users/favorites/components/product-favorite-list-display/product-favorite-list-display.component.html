@@ -1,0 +1,14 @@
+<div class="mt-8">   
+    @if(products().length > 0){
+        @for(product of products(); track product.id){
+            <hr class="border border-primary-light" />
+            <app-product-favorite-list-card
+                [product]="product"
+            />
+        }
+    } @else {
+        <div class="w-full">
+            <p class="text-center">No favorited products.</p>
+        </div>
+    }
+</div> 

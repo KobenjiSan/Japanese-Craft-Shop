@@ -41,4 +41,8 @@ export class ProductMiniDisplayComponent {
       }
     });
   }
+
+  onEdit(){
+
+  }
 }

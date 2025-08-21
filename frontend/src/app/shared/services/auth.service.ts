@@ -3,7 +3,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { jwtDecode } from 'jwt-decode';
-import { LikedProducts, LikeResult } from '../models/liked-products.model';
+import { LikedProductIds, LikedProducts, LikeResult } from '../models/liked-products.model';
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +80,11 @@ export class AuthService {
     });
   }
 
-  getLikedProducts(): Observable<LikedProducts>{
-    return this.http.get<LikedProducts>(`${this.baseUrl}/liked`);
+  getLikedProductIds(): Observable<LikedProductIds>{
+    return this.http.get<LikedProductIds>(`${this.baseUrl}/liked`);
+  }
+
+  getLikedProductsObjs(): Observable<LikedProducts>{
+    return this.http.get<LikedProducts>(`${this.baseUrl}/liked-list`);
   }
 }

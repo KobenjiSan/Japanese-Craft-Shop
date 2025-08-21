@@ -52,7 +52,7 @@ export class ProductPageComponent {
       return;
     }
     
-    this.auth.getLikedProducts().subscribe({
+    this.auth.getLikedProductIds().subscribe({
       next: (res) => {
         this.likedProducts.set(res.likedProducts ?? []);
         const liked = !!this.id && this.likedProducts().includes(this.id);

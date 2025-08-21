@@ -10,7 +10,7 @@ import { HomeComponent } from './features/home/home/home.component';
 import { ShopComponent } from './features/shop/shop/shop.component';
 import { AboutComponent } from './features/about/about/about.component';
 import { UserProfileComponent } from './features/users/user-profile/user-profile.component';
-import { FavoritesPageComponent } from './features/users/favorites-page/favorites-page.component';
+import { FavoritesPageComponent } from './features/users/favorites/favorites-page/favorites-page.component';
 import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-dashboard.component';
 import { ProductPageComponent } from './features/products/product-page/product-page.component';
 

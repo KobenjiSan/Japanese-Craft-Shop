@@ -26,7 +26,7 @@ export class ProductCardComponent {
       return;
     }
     
-    this.auth.getLikedProducts().subscribe({
+    this.auth.getLikedProductIds().subscribe({
       next: (res) => {
         this.likedProducts.set(res.likedProducts ?? []);
         const id = this.product()?.id!;

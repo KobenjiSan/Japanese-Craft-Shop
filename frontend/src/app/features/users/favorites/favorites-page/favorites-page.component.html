@@ -1,0 +1,21 @@
+<div class="hidden md:block place-self-center w-10/12 h-auto">
+    <header class="mt-4 flex justify-between">
+        <div class="flex flex-col gap-2">
+            <h1 class="text-3xl font-bold">Favorite Products</h1>
+            <h2 class="text-xl">Hello, {{auth.getCurrentUser()?.unique_name}}</h2>
+        </div>
+        <div>
+            <a routerLink="/">Back</a>
+        </div>
+    </header>
+    <section>
+        <app-product-favorite-list-display />
+    </section>
+    <div class="w-full flex justify-end mt-16">
+        <button
+            class="px-32 py-6 text-lg font-bold bg-neutral-800 text-neutral-500 my-6"
+        >
+            COMING SOON
+        </button>
+    </div>
+</div>

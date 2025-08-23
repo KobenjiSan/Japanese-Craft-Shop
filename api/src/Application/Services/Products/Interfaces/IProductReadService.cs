@@ -9,5 +9,6 @@ namespace API.src.Application.Services.Products.Interfaces
         Task<List<string>> GetLikedByList(string productId);
         Task<Product?> GetProductByIdAsync(string productId);
         Task<List<Product>> GetProductsFromIds(List<string> productIds);
+        Task<Product> GetMostLikedProductAsync();
     }
 }

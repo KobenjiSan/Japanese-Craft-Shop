@@ -2,6 +2,7 @@ using API.src.Application.Services.Products.Interfaces;
 using API.src.Domain;
 using API.src.Infrastructure;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace API.src.Application.Services.Products
@@ -33,6 +34,11 @@ namespace API.src.Application.Services.Products
             var filter = Builders<Product>.Filter.Eq(p => p.Id, productId);
             var projection = Builders<Product>.Projection.Expression(p => p.LikedByUserIds);
             return await _productsCollection.Find(filter).Project(projection).FirstOrDefaultAsync();
+        }
+
+        public async Task<Product> GetMostLikedProductAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Product?> GetProductByIdAsync(string productId)

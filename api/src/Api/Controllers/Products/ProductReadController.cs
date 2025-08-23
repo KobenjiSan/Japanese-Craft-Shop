@@ -2,6 +2,7 @@ using API.src.Application.Common.DTOs.Products;
 using API.src.Application.Common.Pagination;
 using API.src.Application.Queries.Products.GetAllProducts;
 using API.src.Application.Queries.Products.GetLikedByList;
+using API.src.Application.Queries.Products.GetMostLikedProduct;
 using API.src.Application.Queries.Products.GetProductById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -81,6 +82,15 @@ namespace API.src.Api.Controllers.Products
             var query = new GetLikedByListQuery { ProductId = id };
             var result = await _mediator.Send(query);
 
+            return Ok(result);
+        }
+
+        // GET /api/products/most-liked
+        [HttpGet("most-liked")]
+        public async Task<ActionResult<ProductResponseDto>> GetMostLikedProductAsync()
+        {
+            var query = new MostLikedProductQuery { };
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
     }

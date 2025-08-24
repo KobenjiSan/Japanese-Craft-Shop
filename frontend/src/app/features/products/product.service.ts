@@ -37,4 +37,8 @@ export class ProductService {
   getProductLikedByList(id: string): Observable<LikedByUserResponse>{
     return this.http.get<LikedByUserResponse>(`${this.baseUrl}/likedByList/${id}`);
   }
+
+  getMostLikedProduct(): Observable<Product>{
+    return this.http.get<Product>(`${this.baseUrl}/most-liked`);
+  }
 }

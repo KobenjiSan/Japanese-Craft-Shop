@@ -6,6 +6,7 @@ import { ProductListDisplayComponent } from '../../../products/product-list-disp
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 import { ProductCreateDisplayComponent } from "../product-create-display/product-create-display.component";
+import { MostLikedProductCardComponent } from '../most-liked-product-card/most-liked-product-card.component';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { ProductCreateDisplayComponent } from "../product-create-display/product
   imports: [
     ProductListDisplayComponent,
     PortalModule,
-    ProductCreateDisplayComponent
+    ProductCreateDisplayComponent,
+    MostLikedProductCardComponent,
 ],
   templateUrl: './admin-product-display.component.html',
   styleUrl: './admin-product-display.component.scss'

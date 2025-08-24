@@ -4,8 +4,9 @@
             <h1 class="text-3xl font-bold">Favorite Products</h1>
             <h2 class="text-xl">Hello, {{auth.getCurrentUser()?.unique_name}}</h2>
         </div>
-        <div>
-            <a routerLink="/">Back</a>
+        <div class="border h-fit py-1 px-6 nav-link flex gap-2">
+            <img src="store_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+            <a routerLink="/" class="text-lg">Back</a>
         </div>
     </header>
     <section>
@@ -15,6 +16,7 @@
         <button
             class="px-32 py-6 text-lg font-bold bg-neutral-800 text-neutral-500 my-6"
         >
+            <!-- This is for a add all to cart option that may come later -->
             COMING SOON
         </button>
     </div>

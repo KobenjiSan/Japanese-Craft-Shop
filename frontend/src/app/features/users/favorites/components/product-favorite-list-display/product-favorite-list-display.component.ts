@@ -15,6 +15,7 @@ export class ProductFavoriteListDisplayComponent {
   auth = inject(AuthService);
 
   readonly loadProductsEffect = effect(() => {
+    this.refreshTick();
     this.auth.getLikedProductsObjs().subscribe({
       next: (data) => {
         this.products.set(data.likedProductObjs);
@@ -24,5 +25,11 @@ export class ProductFavoriteListDisplayComponent {
       }
     });
   });
+
+  refreshTick = signal(0);
+
+  onRefresh(){
+    this.refreshTick.update(v => v + 1);
+  }
   
 }

@@ -22,6 +22,18 @@ namespace API.src.Application.Queries.Products.GetAllProducts
         {
             var allProducts = await _readService.GetAllProductsAsync() ?? new List<Product>();
 
+            // search 
+            if (!string.IsNullOrWhiteSpace(request.SearchTerm))
+            {
+                var term = request.SearchTerm.Trim().ToLower();
+
+                allProducts = allProducts.Where(p =>
+                    p.Title.ToLower().Contains(term) ||
+                    p.Category.ToLower().Contains(term) ||
+                    p.Description.ToLower().Contains(term)
+                ).ToList();
+            }
+
             // Get by price
             allProducts = allProducts.Where(p => p.Price >= (decimal)request.MinimumPrice && p.Price <= (decimal)request.MaximumPrice).ToList();
 

@@ -32,8 +32,8 @@ namespace API.src.Api.Controllers.Products
             [FromQuery] int maxPrice = 150,
             [FromQuery] bool stock = false,
             [FromQuery] bool featured = false,
-            [FromQuery] bool newest = false
-        // TODO: Add search 
+            [FromQuery] bool newest = false,
+            [FromQuery] string? search = null
         // TODO: Add sort direction
         )
         {
@@ -46,7 +46,8 @@ namespace API.src.Api.Controllers.Products
                 MaximumPrice = maxPrice,
                 SortNewest = newest,
                 FilterStock = stock,
-                FilterFeatured = featured
+                FilterFeatured = featured,
+                SearchTerm = search
             };
             var result = await _mediator.Send(query);
             return Ok(result);

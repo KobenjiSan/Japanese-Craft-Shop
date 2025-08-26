@@ -13,7 +13,9 @@ namespace API.src.Application.Queries.Products.GetAllProducts
         public int MinimumPrice { get; set; } = 0;
         public int MaximumPrice { get; set; } = int.MaxValue;
         public bool SortNewest { get; set; } = false;
-        public bool FilterStock{ get; set; } = false;
+        public bool FilterStock { get; set; } = false;
         public bool FilterFeatured { get; set; } = false;
+
+        public string? SearchTerm { get; set; }
     }
 }

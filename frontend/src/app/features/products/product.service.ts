@@ -15,7 +15,7 @@ export class ProductService {
 
   getAllProducts(params?: {page?: number; pageSize?: number, category?: string; 
                           minPrice?: number, maxPrice?: number, stock?: boolean, 
-                          featured?: boolean, newest?: boolean}): Observable<PaginatedResult<Product>>{
+                          featured?: boolean, newest?: boolean, search?: string}): Observable<PaginatedResult<Product>>{
     return this.http.get<PaginatedResult<Product>>(this.baseUrl, {
       params: {
         page: params?.page?.toString() ?? '1',
@@ -26,6 +26,7 @@ export class ProductService {
         stock: params?.stock?.toString() ?? 'false',
         featured: params?.featured?.toString() ?? 'false',
         newest: params?.newest?.toString() ?? 'false',
+        search: params?.search || ''
       }
     });
   }

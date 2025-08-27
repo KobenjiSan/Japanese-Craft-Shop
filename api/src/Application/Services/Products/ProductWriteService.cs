@@ -42,5 +42,11 @@ namespace API.src.Application.Services.Products
                 await _productsCollection.UpdateOneAsync(filter, removeUser);
             }
         }
+
+        public async Task UpdateProductAsync(Product product)
+        {
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, product.Id);
+            await _productsCollection.ReplaceOneAsync(filter, product);
+        }
     }
 }

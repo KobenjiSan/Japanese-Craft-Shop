@@ -7,6 +7,7 @@ namespace API.src.Application.Services.Products.Interfaces
         Task<Product> CreateProductAsync(Product product);
         Task DeleteProductAsync(string productId);
         Task UpdateLikedByUserAsync(string userId, string productId, bool isLiked);
+        Task UpdateProductAsync(Product product);
         
     }
 }

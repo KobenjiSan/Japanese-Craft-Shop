@@ -1,11 +1,13 @@
+using API.src.Application.Common.DTOs.Products;
 using API.src.Application.Common.Exceptions;
 using API.src.Application.Services.Products.Interfaces;
 using API.src.Domain;
+using Mapster;
 using MediatR;
 
 namespace API.src.Application.Commands.Products.UpdateProduct
 {
-    public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Unit>
+    public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, ProductResponseDto>
     {
 
         private readonly IProductReadService _productReadService;
@@ -20,7 +22,7 @@ namespace API.src.Application.Commands.Products.UpdateProduct
             _productWriteService = productWriteService;
         }
 
-        public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<ProductResponseDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var originalProduct = await _productReadService.GetProductByIdAsync(request.ProductId);
             if (originalProduct == null)
@@ -80,7 +82,7 @@ namespace API.src.Application.Commands.Products.UpdateProduct
 
             await _productWriteService.UpdateProductAsync(originalProduct);
 
-            return Unit.Value;
+            return originalProduct.Adapt<ProductResponseDto>();
         }
     }
 }

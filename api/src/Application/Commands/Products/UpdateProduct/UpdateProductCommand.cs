@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using API.src.Application.Common.DTOs.Products;
 using MediatR;
 
 namespace API.src.Application.Commands.Products.UpdateProduct
 {
-    public class UpdateProductCommand : IRequest<Unit>
+    public class UpdateProductCommand : IRequest<ProductResponseDto>
     {
         [Required]
         public string ProductId { get; set; } = string.Empty;

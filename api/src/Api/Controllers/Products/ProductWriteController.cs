@@ -73,8 +73,8 @@ namespace API.src.Api.Controllers.Products
                 Stock = request.Stock
             };
 
-            await _mediator.Send(command);
-            return Ok();
+            var updatedProduct = await _mediator.Send(command);
+            return Ok(updatedProduct);
 
         }
     }

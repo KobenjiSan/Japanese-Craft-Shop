@@ -42,7 +42,7 @@ export class ProductListDisplayComponent {
 
   readonly loadProductsEffect = effect(() => {
     this.createdRefreshTick();
-    this.productDeleted();
+    this.productsRefresh();
 
     const current = this.currentPage();
     const size = this.pageSize();
@@ -73,10 +73,14 @@ export class ProductListDisplayComponent {
     });
   });
 
-  productDeleted = signal(0);
+  productsRefresh = signal(0);
   
   onDeleteProduct(){
-    this.productDeleted.update(v => v + 1);
+    this.productsRefresh.update(v => v + 1);
     this.selectedProduct.set(null);
+  }
+
+  onUpdatedProduct(){
+    this.productsRefresh.update(v => v + 1);
   }
 }

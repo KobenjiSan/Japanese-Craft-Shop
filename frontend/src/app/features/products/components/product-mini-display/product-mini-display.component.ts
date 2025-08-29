@@ -1,10 +1,13 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, effect, inject, input, output, signal, ViewChild, viewChild } from '@angular/core';
 import { Product } from '../../../../shared/models/product.model';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { AdminService } from '../../../admin/admin.service';
 import { LikedByListDisplayComponent } from '../liked-by-list-display/liked-by-list-display.component';
 import { ToastrService } from 'ngx-toastr';
+import { CdkPortal, PortalModule } from '@angular/cdk/portal';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { UpdateProductFormDisplayComponent } from '../../../admin/components/update-product-form-display/update-product-form-display.component';
 
 @Component({
   selector: 'app-product-mini-display',
@@ -12,12 +15,27 @@ import { ToastrService } from 'ngx-toastr';
     UpperCasePipe,
     DatePipe,
     LikedByListDisplayComponent,
+    PortalModule,
+    UpdateProductFormDisplayComponent,
   ],
   templateUrl: './product-mini-display.component.html',
   styleUrl: './product-mini-display.component.scss'
 })
 export class ProductMiniDisplayComponent {
-  product = input<Product>();
+  proInput = input<Product>();
+
+  product = signal<Product>(this.proInput()!);
+
+  loadEffect = effect(() => {
+    this.proInput();
+    this.product.set(this.proInput()!);
+  });
+
+  updateEffect = effect(() => {
+    const cur = this.product();
+    this.product.set(cur);
+  });
+
   deleted = output();
 
   auth = inject(AuthService);
@@ -43,6 +61,35 @@ export class ProductMiniDisplayComponent {
   }
 
   onEdit(){
+    this.openModal();
+  }
 
+  overlay = inject(Overlay);
+  @ViewChild(CdkPortal) portal!: CdkPortal;
+
+  overlayRef: any = null;
+
+  openModal(){
+    const config = new OverlayConfig({
+      positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
+      height: '90%',
+      hasBackdrop: true
+    });
+
+    this.overlayRef = this.overlay.create(config);
+    this.overlayRef.attach(this.portal);
+    this.overlayRef.backdropClick().subscribe(() => this.overlayRef.detach());
+  }
+
+  closeWindow(){
+    this.overlayRef.detach();
+  }
+
+  updated = output();
+
+  onProductUpdated(updated: Product){
+    this.updated.emit();
+    this.product.set(updated);
+    this.overlayRef.detach();
   }
 }

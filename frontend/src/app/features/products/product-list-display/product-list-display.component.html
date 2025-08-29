@@ -34,8 +34,9 @@
     </section>
     <section class="w-1/2">
         <app-product-mini-display
-            [product]="selectedProduct()!"
+            [proInput]="selectedProduct()!"
             (deleted)="onDeleteProduct()"
+            (updated)="onUpdatedProduct()"
         />
     </section>
 </div>

@@ -18,5 +18,9 @@ export class AdminService {
     deleteProduct(productId: string): Observable<void>{
       return this.http.delete<void>(`${this.baseUrl}/${productId}`);
     }
+
+    updateProduct(productId: string, formData: FormData): Observable<Product>{
+      return this.http.patch<Product>(`${this.baseUrl}/${productId}`, formData);
+    }
   
 }

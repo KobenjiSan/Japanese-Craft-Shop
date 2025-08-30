@@ -9,7 +9,7 @@ import { adminGuard } from './core/guards/admin.guard';
 import { HomeComponent } from './features/home/home/home.component';
 import { ShopComponent } from './features/shop/shop/shop.component';
 import { AboutComponent } from './features/about/about/about.component';
-import { UserProfileComponent } from './features/users/user-profile/user-profile.component';
+import { UserProfileDisplayComponent } from './features/users/user-profile/user-profile-display/user-profile-display.component';
 import { FavoritesPageComponent } from './features/users/favorites/favorites-page/favorites-page.component';
 import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-dashboard.component';
 import { ProductPageComponent } from './features/products/product-page/product-page.component';
@@ -33,7 +33,7 @@ export const routes: Routes = [
         children: [
             {path: 'login', component: LoginComponent, canActivate: [guestGuard]},
             {path: 'register', component: RegisterComponent, canActivate: [guestGuard]},
-            {path: 'profile', component: UserProfileComponent, canActivate: [authGuard]},
+            {path: 'profile', component: UserProfileDisplayComponent, canActivate: [authGuard]},
             {path: 'favorites', component: FavoritesPageComponent, canActivate: [authGuard]},
             {path: 'admin', component: AdminDashboardComponent, canActivate: [adminGuard]}
         ]

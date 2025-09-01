@@ -1,0 +1,7 @@
+.nav{
+    @apply cursor-pointer border px-2 py-3 text-center;
+}
+
+.selected{
+    @apply font-bold bg-secondary border-none text-brand-dark;
+}

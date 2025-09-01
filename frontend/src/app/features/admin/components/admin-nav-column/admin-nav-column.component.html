@@ -1,6 +1,21 @@
-<div class="px-4 text-lg">
-    <p class="nav-link cursor-pointer">Products</p>
-    <p>Customers</p>
-    <p>Shop Settings</p>
-    <p class="text-primary-light">Orders (coming soon)</p>
+<div class="px-4 text-sm xl:text-xl flex flex-col gap-4">
+    <a (click)="setCurrentPage('products')" 
+        class="{{ currentPage() === 'products' ? 'selected' : '' }} nav-link nav"
+    >
+        PRODUCTS
+    </a>
+    <a (click)="setCurrentPage('customers')" 
+        class="{{ currentPage() === 'customers' ? 'selected' : '' }} nav-link nav"
+    >
+        CUSTOMERS
+    </a>
+    <a (click)="setCurrentPage('settings')" 
+        class="{{ currentPage() === 'settings' ? 'selected' : '' }} nav-link nav"
+    >
+        SHOP SETTINGS
+    </a>
+    <a class="text-primary-light nav border-primary-light !py-0.5">
+        ORDERS 
+        <p class="text-sm">(coming soon)</p>
+    </a>
 </div>

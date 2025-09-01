@@ -16,7 +16,7 @@ export class FeaturedDisplayComponent {
   productService = inject(ProductService);
 
   readonly loadProductsEffect = effect(() => {
-    this.productService.getAllProducts().subscribe({
+    this.productService.getAllProducts({pageSize: 10}).subscribe({
       next: (data) => {
         this.products.set(data.items)
       },

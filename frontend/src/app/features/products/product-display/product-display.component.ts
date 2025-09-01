@@ -16,7 +16,7 @@ export class ProductDisplayComponent {
   filters = input<FilteredProducts>();
 
   currentPage = signal(1);
-  pageSize = signal(10);
+  pageSize = signal(24);
   totalPages = signal(1);
 
   productService = inject(ProductService);

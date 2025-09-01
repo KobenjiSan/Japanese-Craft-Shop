@@ -1,4 +1,4 @@
-<div class="py-4 px-4 w-full">
+<div class="py-4 px-4 w-full overflow-hidden">
     <h1 class="text-center text-2xl md:text-5xl font-bold">FEATURED</h1>
     <hr class="border border-brand-light my-2 w-10/12 mx-auto" />
     <section class="mt-4 flex flex-row justify-center w-10/12 mx-auto gap-4">
@@ -7,7 +7,7 @@
                 @if(product.isFeatured){
                     <app-product-card 
                         [product]="product"
-                        [size]="'large'"
+                        [size]="'default'"
                     />
                 }
             }

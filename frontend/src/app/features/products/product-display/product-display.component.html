@@ -1,5 +1,6 @@
 <div class="py-4 px-4 w-full">
-    <section class="mt-4 flex flex-row w-10/12 mx-auto gap-4">
+    <section class="mt-4 grid grid-flow-row content-center
+    2xl:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] lg:grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] w-full mx-auto gap-4">
         @if(products().length > 0){
             @for(product of products(); track product.id){
                 <app-product-card 

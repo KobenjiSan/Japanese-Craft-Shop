@@ -1,1 +1,13 @@
-<p>recent-saves works!</p>
+<div class="flex flex-col w-fit">
+    <h1 class="text-3xl">RECENT SAVES</h1>
+    <div class="flex gap-4 border-t pt-4">
+        @for(product of products()?.slice(0, 3); track $index){
+            <app-product-card [product]="product" [size]="'large'" />
+        }
+    </div>
+    <div class="mt-4">
+        <button class="btn-border nav-link w-full py-2 text-xl" routerLink="/favorites">
+            View All
+        </button>
+    </div>
+</div>

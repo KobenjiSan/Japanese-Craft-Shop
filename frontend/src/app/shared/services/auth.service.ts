@@ -42,6 +42,11 @@ export class AuthService {
     return user ? user.unique_name : 'Not Signed In';
   }
 
+  getUserEmail(): string {
+    const user = this.getCurrentUser();
+    return user ? user.email : 'Not Signed In';
+  }
+
   register(username: string, email: string, password: string): Observable<any>{
     return this.http.post<any>(`${this.baseUrl}/register`, {
       username,

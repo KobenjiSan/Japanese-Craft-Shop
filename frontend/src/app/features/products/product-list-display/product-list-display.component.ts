@@ -35,7 +35,7 @@ export class ProductListDisplayComponent {
   filters = input<FilteredProducts>();
 
   currentPage = signal(1);
-  pageSize = signal(12);
+  pageSize = signal(8);
   totalPages = signal(1);
 
   productService = inject(ProductService);
@@ -46,25 +46,14 @@ export class ProductListDisplayComponent {
 
     const current = this.currentPage();
     const size = this.pageSize();
-    const category = this.filters()?.category;
-    const minPrice = this.filters()?.minPrice;
-    const maxPrice = this.filters()?.maxPrice;
-    const byNewest = this.filters()?.byNewest;
-    const byStock = this.filters()?.byStock;
-    const byFeatured = this.filters()?.byFeatured;
 
     this.productService.getAllProducts({
       page: current,
       pageSize: size,
-      category: category,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
-      stock: byStock,
-      featured: byFeatured,
-      newest: byNewest
     }).subscribe({
       next: (data) => {
         this.products.set(data.items);
+        this.totalPages.set(data.totalPages);
       },
       error: (err) => {
         console.error("Error fetching chapters", err);
@@ -82,5 +71,17 @@ export class ProductListDisplayComponent {
 
   onUpdatedProduct(){
     this.productsRefresh.update(v => v + 1);
+  }
+
+  goToNextPage(){
+    if(this.currentPage() < this.totalPages()){
+      this.currentPage.update(p => p + 1)
+    }
+  }
+
+  goToPreviousPage(){
+    if(this.currentPage() > 1){
+      this.currentPage.update(p => p - 1)
+    }
   }
 }

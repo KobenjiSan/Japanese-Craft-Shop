@@ -1,0 +1,40 @@
+<div class="list-hover">
+    <div 
+        class="w-full h-16 shadow-sm shadow-black cursor-pointer place-self-center font-bold
+                {{selected() ? 'bg-secondary text-brand-dark' : ''}}" 
+        (click)="onSelect()"
+    >
+        <div class="flex h-full flex-row py-2 px-4">
+            <div class="w-2/12 block-logic">
+                <p class="italic center-left">{{user()?.username}}</p>
+            </div>
+            <div class="w-4/12 block-logic">
+                <p class="center-left">{{user()?.email}}</p>
+            </div>
+            <div class="w-2/12 block-logic">
+                <p class="center-left">{{user()?.role}}</p>
+            </div>
+            <div class="w-3/12 block-logic">
+                <h1 class="font-bold center-left justify-end">{{user()?.userId}}</h1>
+            </div>
+            <div class="w-1/12 block-logic">
+                <div class="center-left place-self-end">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        class="{{ selected() ? 'rotate-180 text-[#1C1B1A]' : 'rotate-0 text-[#F5F1EB]' }}
+                                w-12 h-12 origin-center transition-all duration-[800ms] ease-in-out fill-current">
+                    <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="{{ selected() ? 'h-40 opacity-100': 'h-0 opacity-0'}} 
+        w-full shadow-inner shadow-black place-self-center overflow-hidden transition-all duration-[800ms] ease-in-out"
+    >
+        @if(user()?.likedProductIds?.length! > 0){
+            <p class="center-left">{{user()?.likedProductIds}}</p>
+        } @else {
+            <p class="center-left justify-center">No Liked Products</p>
+        }
+    </div>
+</div>

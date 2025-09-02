@@ -1,0 +1,15 @@
+.block-logic{
+    @apply overflow-hidden contain-content text-nowrap mr-1.5;
+}
+
+.center-left{
+    @apply flex items-center h-full;
+}
+
+.list-hover {
+    @apply interaction-effects hover:scale-[1.02] active:scale-95;
+}
+
+.interaction-effects {
+    @apply transition-transform duration-700 ease-in-out transform;
+}

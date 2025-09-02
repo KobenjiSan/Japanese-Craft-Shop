@@ -1,1 +1,31 @@
-<p>admin-customer-display works!</p>
+<div class="px-4">
+    <section class="flex justify-between">
+        <div>
+            <h1 class="text-6xl font-bold">Customers</h1>
+        </div>
+    </section>
+    <section class="px-8 pt-2">
+        <div class="flex justify-between items-center px-4 py-2 border-b border-primary-light mb-4">
+            <button
+                class="px-4 py-2 rounded disabled:opacity-20"
+                (click)="goToPreviousPage()"
+                [disabled]="currentPage() === 1"
+            >
+                ← Previous
+            </button>
+            <span class="text-sm">
+                Page {{ currentPage() }} of {{ totalPages() }}
+            </span>
+            <button
+                class="px-4 py-2 rounded disabled:opacity-20"
+                (click)="goToNextPage()"
+                [disabled]="currentPage() >= totalPages()"
+            >
+                Next →
+            </button>
+        </div>
+        @for(user of users(); track user.userId){
+            <app-admin-user-card [user]="user" />
+        }
+    </section>
+</div>

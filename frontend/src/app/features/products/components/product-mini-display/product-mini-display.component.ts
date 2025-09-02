@@ -72,7 +72,7 @@ export class ProductMiniDisplayComponent {
   openModal(){
     const config = new OverlayConfig({
       positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
-      height: '90%',
+      height: '97%',
       hasBackdrop: true
     });
 

@@ -6,11 +6,11 @@
             (click)="onCloseWindow()"
         />
     </div>
-    <div class="flex gap-10 m-6">
+    <div class="flex m-2">
         <div class="border-2 border-primary-light w-full max-w-[100%] min-w-0">
             <form [formGroup]="updateProductForm" (ngSubmit)="onSubmit()" class="mx-4 my-2">
                 <div class="flex justify-between">
-                    <div class="mt-4">
+                    <div class="mt-2">
                         <input 
                             type="text" 
                             placeholder="Title" 
@@ -18,12 +18,12 @@
                             class="bg-brand-dark px-2 text-xl focus:border-none place-self-center focus:outline-none" 
                         />
                         @if(updateProductForm.controls['title'].touched && updateProductForm.controls['title'].invalid) {
-                            <div class="h-2 px-2 mb-4">
+                            <div class="h-2 px-2 mb-2">
                                 <p class="text-base text-red-400">Title is required.</p>
                             </div>
                         }
                     </div>
-                    <div class="flex my-4 gap-2">
+                    <div class="flex my-2 gap-2">
                         <button 
                             type="button"
                             (click)="markFeatured()"
@@ -44,7 +44,7 @@
                         <p class="text-base text-red-400">Description is required.</p>
                     </div>
                 }
-                <div class="border-2 border-brand-light mt-6 flex">
+                <div class="border-2 border-brand-light mt-3 flex">
                     <label class="place-self-center p-2">Price</label>
                     <input 
                         type="number" 
@@ -60,7 +60,7 @@
                         <p class="text-base text-red-400">Price required. Between $1.00 - $150.00</p>
                     </div>
                 }
-                <div class="border-2 border-brand-light mt-6 flex">
+                <div class="border-2 border-brand-light mt-3 flex">
                     <label class="place-self-center p-2">Stock</label>
                     <input 
                         type="number" 
@@ -75,7 +75,7 @@
                         <p class="text-base text-red-400">Stock required. Minimum of 1.</p>
                     </div>
                 }
-                <div class="my-6">
+                <div class="my-3">
                     <div class="flex gap-4">
                         <label class="text-center">Select Category</label>
                         @if(updateProductForm.controls['category'].touched && updateProductForm.controls['category'].invalid){

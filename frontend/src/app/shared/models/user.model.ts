@@ -5,3 +5,11 @@ export interface User{
     unique_name: string;
     role: string;
 }
+
+export interface UserResponse{
+    userId: string;
+    username: string;
+    email: string;
+    likedProductIds: string[];
+    role: string;
+}

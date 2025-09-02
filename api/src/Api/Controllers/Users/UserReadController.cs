@@ -2,6 +2,11 @@ using API.src.Application.Queries.Users.GetAllLikedByUser;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using API.src.Application.Queries.Users.GetLikedProductsByUser;
+using Microsoft.AspNetCore.Authorization;
+using API.src.Application.Common.Pagination;
+using API.src.Application.Common.DTOs.Users;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using API.src.Application.Queries.Users.GetAllUsers;
 
 namespace API.src.Api.Controllers.Users
 {
@@ -30,6 +35,24 @@ namespace API.src.Api.Controllers.Users
         public async Task<ActionResult<GetLikedProductsByUserResponseDto>> GetLikedProductsByUser()
         {
             var query = new GetLikedProductsByUserQuery { };
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        // GET /api/users
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<ActionResult<PaginatedResult<UserResponseDto>>> GetAllUsers(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 25
+        )
+        {
+            var query = new GetAllUsersQuery
+            {
+                Page = page,
+                PageSize = pageSize
+            };
+
             var result = await _mediator.Send(query);
             return Ok(result);
         }

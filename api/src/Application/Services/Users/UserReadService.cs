@@ -53,5 +53,10 @@ namespace API.src.Application.Services.Users
             });
             return await _usersCollection.Find(filter).Project(projection).ToListAsync();
         }
+
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            return await _usersCollection.Find(_ => true).ToListAsync();
+        }
     }
 }

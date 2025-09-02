@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { AdminNavColumnComponent } from '../components/admin-nav-column/admin-nav-column.component';
 import { AdminHeaderComponent } from '../components/admin-header/admin-header.component';
 import { Router, RouterOutlet } from '@angular/router';
@@ -16,6 +16,12 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class AdminDashboardComponent {
   router = inject(Router);
+
+  setCurrentPageEffect = effect(() => {
+    const path = this.router.url.split('?')[0].split('#')[0].split('/').filter(Boolean);
+    const afterAdmin = path[path.indexOf('admin') + 1] ?? '';
+    this.currentPage.set(afterAdmin || 'products');
+  })
 
   currentPage = signal<string>('products');
 

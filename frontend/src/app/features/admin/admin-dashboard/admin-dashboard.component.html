@@ -2,7 +2,7 @@
 <body class="place-self-center w-full h-auto mb-16">
     <div class="flex flex-row justify-between mt-6">
         <section class="w-2/12 border-r-2 border-primary-light pl-2 pr-6">
-            <app-admin-nav-column (currentPageOutput)="setCurrentPage($event)" />
+            <app-admin-nav-column (currentPageOutput)="setCurrentPage($event)" [currentPageInput]="currentPage()" />
         </section>
         <section class="flex-1 w-10/12">
             <router-outlet></router-outlet>

@@ -1,5 +1,26 @@
-<div class="py-4 px-4 w-full">
-    <section class="mt-4 grid grid-flow-row content-center
+<div class="px-4 w-full">
+    <section class="w-full">
+        <div class="flex justify-between items-center pn-1 border-b border-primary-light mb-2">
+            <button
+                class="px-4 py-2 rounded disabled:opacity-20"
+                (click)="goToPreviousPage()"
+                [disabled]="currentPage() === 1"
+            >
+                ← Previous
+            </button>
+            <span class="text-sm">
+                Page {{ currentPage() }} of {{ totalPages() }}
+            </span>
+            <button
+                class="px-4 py-2 rounded disabled:opacity-20"
+                (click)="goToNextPage()"
+                [disabled]="currentPage() >= totalPages()"
+            >
+                Next →
+            </button>
+        </div>
+    </section>
+    <section class="mt-4 grid grid-flow-row content-center place-items-center
     2xl:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] lg:grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] w-full mx-auto gap-4">
         @if(products().length > 0){
             @for(product of products(); track product.id){

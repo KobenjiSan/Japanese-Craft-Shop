@@ -43,10 +43,23 @@ export class ProductDisplayComponent {
     }).subscribe({
       next: (data) => {
         this.products.set(data.items);
+        this.totalPages.set(data.totalPages);
       },
       error: (err) => {
         console.error("Error fetching chapters", err);
       }
     });
   });
+
+  goToNextPage(){
+    if(this.currentPage() < this.totalPages()){
+      this.currentPage.update(p => p + 1)
+    }
+  }
+
+  goToPreviousPage(){
+    if(this.currentPage() > 1){
+      this.currentPage.update(p => p - 1)
+    }
+  }
 }

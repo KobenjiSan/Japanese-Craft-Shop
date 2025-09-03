@@ -44,6 +44,7 @@ export class ProductDisplayComponent {
       next: (data) => {
         this.products.set(data.items);
         this.totalPages.set(data.totalPages);
+        if(this.currentPage() > this.totalPages()) this.currentPage.set(1);
       },
       error: (err) => {
         console.error("Error fetching chapters", err);

@@ -1,8 +1,14 @@
 <nav class="flex flex-row justify-between my-2">    <!-- will be used for filtering -->
-    <button class="nav-link cursor-pointer" (click)="onSetCategory('pottery')">POTTERY</button>
-    <button class="nav-link cursor-pointer" (click)="onSetCategory('textile')">TEXTILE</button>
-    <button class="nav-link cursor-pointer" (click)="onSetCategory('wood')">WOOD CRAFT</button>
-    <button class="nav-link cursor-pointer" (click)="onSetCategory('paper')">PAPER CRAFT</button>
-    <button class="nav-link cursor-pointer" (click)="onSetCategory('metalwork')">METALWORK</button>
-    <button class="nav-link cursor-pointer" (click)="onSetCategory('art')">ARTS</button>
+    <button class="nav-link cursor-pointer {{curCat() == 'pottery' ? 'font-bold scale-[115%]' : ''}}" 
+        (click)="onSetCategory('pottery')">POTTERY</button>
+    <button class="nav-link cursor-pointer {{curCat() == 'textile' ? 'font-bold scale-[115%]' : ''}}" 
+        (click)="onSetCategory('textile')">TEXTILE</button>
+    <button class="nav-link cursor-pointer {{curCat() == 'wood' ? 'font-bold scale-[115%]' : ''}}" 
+        (click)="onSetCategory('wood')">WOOD CRAFT</button>
+    <button class="nav-link cursor-pointer {{curCat() == 'paper' ? 'font-bold scale-[115%]' : ''}}" 
+        (click)="onSetCategory('paper')">PAPER CRAFT</button>
+    <button class="nav-link cursor-pointer {{curCat() == 'metalwork' ? 'font-bold scale-[115%]' : ''}}" 
+        (click)="onSetCategory('metalwork')">METALWORK</button>
+    <button class="nav-link cursor-pointer {{curCat() == 'art' ? 'font-bold scale-[115%]' : ''}}" 
+        (click)="onSetCategory('art')">ARTS</button>
 </nav>

@@ -13,3 +13,16 @@
 .interaction-effects {
     @apply transition-transform duration-700 ease-in-out transform;
 }
+
+/* minimal scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #f5f1eb39;
+  border-radius: 9999px;
+}

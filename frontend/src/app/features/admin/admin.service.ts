@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../../shared/models/product.model';
 import { UserResponse } from '../../shared/models/user.model';
 import { PaginatedResult } from '../../shared/models/paginated-result.model';
+import { LikedProducts } from '../../shared/models/liked-products.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,14 @@ export class AdminService {
         params: {
           page: params?.page?.toString() ?? '1',
           pageSize: params?.pageSize?.toString() ?? '25'
+        }
+      });
+    }
+
+    getLikedProductsObjs(params?: {userId: string}): Observable<LikedProducts>{
+      return this.http.get<LikedProducts>(`${this.baseUrl}/users/liked-list`, {
+        params: {
+          userId: params?.userId || ''
         }
       });
     }

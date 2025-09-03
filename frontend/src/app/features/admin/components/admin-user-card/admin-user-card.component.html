@@ -28,11 +28,24 @@
             </div>
         </div>
     </div>
-    <div class="{{ selected() ? 'h-40 opacity-100': 'h-0 opacity-0'}} 
+    <div class="{{ selected() ? 'h-52 opacity-100 overflow-y-auto': 'h-0 opacity-0'}} 
         w-full shadow-inner shadow-black place-self-center overflow-hidden transition-all duration-[800ms] ease-in-out"
     >
         @if(user()?.likedProductIds?.length! > 0){
-            <p class="center-left">{{user()?.likedProductIds}}</p>
+            <h1 class="w-full text-center py-1 font-bold border-b border-primary-light mb-2">Liked Products</h1>
+            @for(product of likedProducts(); track $index){
+                <div class="w-full h-16 shadow-sm shadow-black py-1">
+                    <div class="flex h-full px-6">
+                        <div class="w-2/12">
+                            <img src="{{product.imageUrls[0]}}" alt="{{product.title}} image" class="w-auto h-full">
+                        </div>
+                        <p class="w-4/12 center-left font-bold">{{product.title}}</p>
+                        <p class="w-3/12 center-left italic">{{product.category}}</p>
+                        <p class="w-2/12 center-left">{{product.price}}</p>
+                        <p class="w-1/12 text-neutral-500 text-xs center-left justify-end">{{product.id}}</p>
+                    </div>
+                </div>
+            }
         } @else {
             <p class="center-left justify-center">No Liked Products</p>
         }

@@ -1,15 +1,23 @@
 <body class="w-10/12 place-self-center h-auto mt-16 flex flex-row">
     <div class="flex flex-col justify-between w-4/12 p-4">
-        <div>
+        <div class="border-t border-primary-light">
             @if(product()?.isFeatured){
-                <h3 class="italic text-center border-y py-3 border-primary-light">Featured Product</h3>
+                <h3 class="italic text-center border-b py-3 border-primary-light">Featured Product</h3>
             }
             <h1 class="text-5xl font-bold text-right py-4 text-ellipsis overflow-hidden">{{ product()?.title | uppercase }}</h1>
         </div>
+        
         <div>
+            <section class="w-full border-t py-1.5 border-primary-light">
+                <h2 class="text-xl italic text-center">{{product()?.category}}</h2>
+            </section>
+            <section class="flex flex-row justify-between border-t py-1.5 border-primary-light">
+                <p class="self-center text-xl">In Stock:</p>
+                <h2 class="text-end text-2xl">{{product()?.stock}}</h2>
+            </section>
             <section class="flex flex-row justify-between border-y py-3 border-primary-light">
-                <p class="self-center text-xl">Total:</p>
-                <h2 class="text-end text-4xl">{{product()?.price}}</h2>
+                <p class="self-center text-xl">Price:</p>
+                <h2 class="text-end text-4xl">${{product()?.price}}</h2>
             </section>
             <div class="flex flex-row justify-between gap-4 my-4">
                 <button

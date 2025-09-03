@@ -32,9 +32,11 @@ namespace API.src.Api.Controllers.Users
 
         // GET /api/users/liked-list
         [HttpGet("liked-list")]
-        public async Task<ActionResult<GetLikedProductsByUserResponseDto>> GetLikedProductsByUser()
+        public async Task<ActionResult<GetLikedProductsByUserResponseDto>> GetLikedProductsByUser(
+            [FromQuery] string? userId = null
+        )
         {
-            var query = new GetLikedProductsByUserQuery { };
+            var query = new GetLikedProductsByUserQuery { UserId = userId };
             var result = await _mediator.Send(query);
             return Ok(result);
         }

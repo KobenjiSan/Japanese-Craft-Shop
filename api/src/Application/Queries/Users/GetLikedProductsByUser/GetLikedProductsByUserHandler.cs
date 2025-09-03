@@ -27,7 +27,8 @@ namespace API.src.Application.Queries.Users.GetLikedProductsByUser
 
         public async Task<GetLikedProductsByUserResponseDto> Handle(GetLikedProductsByUserQuery request, CancellationToken cancellationToken)
         {
-            var userId = _httpContextAccessor.HttpContext?.User?.FindFirst("id")?.Value;
+            
+            var userId = !string.IsNullOrWhiteSpace(request.UserId) ? request.UserId : _httpContextAccessor.HttpContext?.User?.FindFirst("id")?.Value;
             if (userId == null)
                 throw new UnauthorizedAccessException("User ID not found in token.");
 

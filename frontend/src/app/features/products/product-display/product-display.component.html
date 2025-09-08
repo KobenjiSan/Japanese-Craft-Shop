@@ -20,17 +20,19 @@
             </button>
         </div>
     </section>
-    <section class="mt-4 grid grid-flow-row content-center place-items-center
-    2xl:grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] lg:grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] w-full mx-auto gap-4">
-        @if(products().length > 0){
-            @for(product of products(); track product.id){
-                <app-product-card 
-                    [product]="product"
-                    [size]="'small'"
-                />
+    <section class="mt-4 w-full mx-auto @container">
+        <!-- Look at media queries @Container to help with this grid -->
+        <div class="grid gap-4 justify-items-center @md:grid-cols-4 @lg:grid-cols-5 @xl:grid-cols-5"> 
+            @if(products().length > 0){
+                @for(product of products(); track product.id){
+                    <app-product-card 
+                        [product]="product"
+                        [size]="'small'"
+                    />
+                }
+            } @else {
+                <p>No products.</p>
             }
-        } @else {
-            <p>No products.</p>
-        }
+        </div>
     </section>
 </div>

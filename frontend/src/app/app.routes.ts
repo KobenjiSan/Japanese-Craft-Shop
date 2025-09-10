@@ -15,7 +15,6 @@ import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-
 import { ProductPageComponent } from './features/products/product-page/product-page.component';
 import { AdminProductDisplayComponent } from './features/admin/components/admin-product-display/admin-product-display.component';
 import { AdminCustomerDisplayComponent } from './features/admin/components/admin-customer-display/admin-customer-display.component';
-import { AdminSettingsDisplayComponent } from './features/admin/components/admin-settings-display/admin-settings-display.component';
 
 // NOTE: this is eagerly loaded ---- Break into lazy loading
 export const routes: Routes = [
@@ -39,8 +38,7 @@ export const routes: Routes = [
             {path: 'favorites', component: FavoritesPageComponent, canActivate: [authGuard]},
             {path: 'admin', component: AdminDashboardComponent, canActivate: [adminGuard],
             children: [ {path: 'products', component: AdminProductDisplayComponent, canActivate: [adminGuard]},
-                        { path: 'customers', component: AdminCustomerDisplayComponent, canActivate: [adminGuard]},
-                        { path: 'settings', component: AdminSettingsDisplayComponent, canActivate: [adminGuard]}]
+                        { path: 'customers', component: AdminCustomerDisplayComponent, canActivate: [adminGuard]}]
             }
         ]
     }
